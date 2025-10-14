@@ -8,7 +8,7 @@ const queryClient = new QueryClient()
 function App() {
  
     return (
-      <div className="w-full relative font-open-sans text-linear-to-br to-cyan-400 from-black">
+      <div className="w-full relative font-open-sans bg-black bg-[url(/bg1.jpeg)] bg-no-repeat bg-cover bg-fixed bg-top">
         <QueryClientProvider client={queryClient}>
           <Navbar />
           <Outlet />
