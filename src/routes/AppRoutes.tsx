@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         element: <SearchPage />,
       },
       {
-        path: "content",
+        path: ":mediaType",
         children: [
           {
             path: ":movieId",

@@ -13,12 +13,12 @@ export default function DarkModeToggle() {
       {darkMode ? (
         <IconSun
           onClick={toggleDarkMode}
-          className="text-gray-400 size-6 hover:scale-110 transition-transform duration-300 hover:cursor-pointer  hover:text-white"
+          className="text-gray-400 size-5 hover:scale-120 transition-transform duration-300 hover:cursor-pointer  hover:text-white"
         />
       ) : (
         <IconMoon
           onClick={toggleDarkMode}
-          className="text-gray-400 size-6 hover:scale-110 transition-transform duration-300 hover:cursor-pointer  hover:text-white "
+          className="text-gray-400 size-5 hover:scale-120 transition-transform duration-300 hover:cursor-pointer  hover:text-white "
         />
       )}
     </div>
