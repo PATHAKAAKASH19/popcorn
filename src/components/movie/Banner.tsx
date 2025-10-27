@@ -5,12 +5,12 @@ type BannerProps = {
 
     backdrop_path: string,
     isTrailerArrayEmpty:boolean,
-    togglePlay: () => void
+    togglePlay?: () => void
 }
 
 export default function Banner({backdrop_path, isTrailerArrayEmpty, togglePlay}:BannerProps) {
   return (
-    <div className="pt-20 h-[950px] w-full relative aspect-[2/3] max-lg:h-[750px] max-sm:h-[550px] max-sm:pt-15">
+    <div className="pt-20 h-[950px] w-full relative aspect-[4/2] max-lg:h-[750px] max-sm:h-[550px] max-sm:pt-15 transition-all duration-500 ease-in-out  shrink-0 ">
       <img
         src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
         className="w-full h-full object-cover"

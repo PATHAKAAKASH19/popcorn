@@ -4,17 +4,20 @@ import type { MovieProps } from "@/types/movies";
 
 
 type MovieCardProp = {
-  movie:MovieProps
+  movie: MovieProps,
+  mediaType?: string,
+  cn?:string
 }
 
 
-export default function MovieCard({ movie }: MovieCardProp) {
+export default function VerticalCard({ movie , mediaType, cn="w-55"}: MovieCardProp) {
   
+  console.log(movie)
   return (
     <Link
-      to={`/${movie.media_type}/${movie.id}`}
-      className="rounded-xl w-45 flex flex-col gap-3 pb-4 backdrop-blur hover:scale-110 transition-transform duration-300 max-lg:w-45  
-      shrink-0 max-sm:w-33 "
+      to={`/${mediaType}/${movie.id}`}
+      className={`rounded-xl  flex flex-col gap-3 pb-4 backdrop-blur hover:scale-110 transition-transform duration-300 ease-in-out 
+      shrink-0 max-sm:w-33 ${cn}`}
       key={movie.title ? movie.title : movie?.name}
     >
       {movie.poster_path ? (
@@ -36,7 +39,7 @@ export default function MovieCard({ movie }: MovieCardProp) {
           {movie.title ? movie.title : movie.name}
         </h1>
         <h1 className="pl-2 text-[12px] tracking-wider text-gray-300 max-sm:text-[11px]">
-          {movie?.media_type}
+          {mediaType}
         </h1>
       </div>
     </Link>

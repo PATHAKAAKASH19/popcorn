@@ -9,7 +9,7 @@ const queryClient = new QueryClient()
 function App() {
  
     return (
-      <div className="w-full  font-open-sans bg-black bg-[url(/bg1.jpeg)] bg-no-repeat bg-cover bg-fixed bg-top ">
+      <div className="w-full  font-open-sans bg-black bg-no-repeat bg-cover bg-fixed bg-top relative ">
         <QueryClientProvider client={queryClient}>
           <ScrollToTop/>
           <Navbar />

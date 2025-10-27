@@ -10,7 +10,7 @@ import type {
   CastProps,
 } from "@/types/movies";
 import axios from "axios";
-import MovieCard from "@/components/movie/MovieCard";
+import VerticalCard from "@/components/movie/VerticalCard";
 import Player from "@/components/movie/Player";
 import Banner from "@/components/movie/Banner";
 
@@ -43,7 +43,7 @@ const fetchMovieTrailer = (mediaType: string, movieId: string) => {
 export default function ContentPage() {
   const { mediaType, movieId } = useParams();
 
-  console.log(movieId);
+  console.log(movieId, mediaType);
   const { data: movieDetails } = useQuery({
     queryKey: ["movie-details", movieId],
     queryFn: () => fetchMovieDatails(mediaType!, movieId!),
@@ -66,14 +66,16 @@ export default function ContentPage() {
   console.log("trailer", movieTrailer);
   console.log("details", movieDetails);
   return (
-    <div className={`w-full  flex flex-col bg-black overflow-y-hidden`}>
+    <div
+      className={`w-full  flex flex-col bg-black overflow-y-hidden transition-all duration-500 ease-in-out`}
+    >
       <Banner
         backdrop_path={movieDetails?.data.backdrop_path}
         isTrailerArrayEmpty={!!movieTrailer?.data.results.length}
         togglePlay={togglePlay}
       />
 
-      <div className=" w-full  relative bottom-65 px-80  flex flex-col justify-between items-center max-lg:bottom-45 max-sm:px-2 max-sm:bottom-22  max-md:px-10 max-sm:w-full ">
+      <div className=" w-full  relative bottom-65 px-80  flex flex-col justify-between items-center max-lg:bottom-45 max-sm:px-2 max-sm:bottom-22  max-md:px-10 max-sm:w-full  transition-all duration-500 ease-in-out">
         <div
           className="grid grid-cols-4 w-6xl mb-6 gap-10 max-xl:w-4xl max-lg:grid-cols-3  
         max-lg:w-2xl max-md:w-xl max-md:gap-x-30  max-sm:w-fit max-sm:gap-x-12 max-sm:gap-y-9 max-sm:mb-0
@@ -81,13 +83,15 @@ export default function ContentPage() {
         "
         >
           <div className="w-50 h-full rounded-2xl justify-self-end max-xl:justify-self-start max-md:w-43 max-sm:w-30 ">
-            {
-             movieDetails?.data.poster_path? (<img
+            {movieDetails?.data.poster_path ? (
+              <img
                 src={`https://image.tmdb.org/t/p/w780/${movieDetails?.data.poster_path}`}
                 alt={`${movieDetails?.data.original_title}`}
                 className="rounded-2xl "
-              ></img>):( <div className="w-45 h-60 bg-gray-800 rounded-2xl"></div>)
-            }
+              ></img>
+            ) : (
+              <div className="w-45 h-60 bg-gray-800 rounded-2xl"></div>
+            )}
           </div>
 
           <div className="col-span-2 self-end ">
@@ -332,10 +336,11 @@ export default function ContentPage() {
                   .slice(0, 5)
                   .map((movie: MovieProps) => {
                     return (
-                      <MovieCard
+                      <VerticalCard
                         movie={{ ...movie, media_type: mediaType! }}
                         key={`${movie.title ? movie.title : movie.name}`}
-                      ></MovieCard>
+                        
+                      ></VerticalCard>
                     );
                   })}
               </div>
