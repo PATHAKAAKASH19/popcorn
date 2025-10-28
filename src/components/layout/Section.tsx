@@ -2,8 +2,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import VerticalCard from "../movie/VerticalCard";
 import type { MovieProps } from "@/types/movies";
-import SkeletonCard from "../movie/SkeletonCard";
-import HorizontalCard from "../movie/HorizontalCard";
+
 
 import {
   IconChevronRight,
@@ -12,10 +11,6 @@ import {
 
 import { useRef } from "react";
 
-type Params = {
-  region: string;
-  sort_by: string;
-};
 
 type SectionProps = {
   queryKey: string;
@@ -42,7 +37,7 @@ export default function Section({
   mediaType,
   width
 }: SectionProps) {
-  const { data: movies, isLoading } = useQuery({
+  const { data: movies } = useQuery({
     queryKey: [queryKey],
     queryFn: () => fetchData(endpoint, params),
   });
@@ -69,11 +64,11 @@ export default function Section({
 
   return (
     <section className="mb-3  max-sm:mb-0 transition-transform duration-300 ease-in-out">
-      {!isLoading ? (
+      {
         <>
           <h1 className="pt-8 pb-5 text-2xl font-open-sans font-medium text-white max-sm:text-[17px] max-sm:pb-0">
             {heading}
-          </h1> 
+          </h1>
 
           <div className="w-full relative group/parent">
             <div
@@ -91,7 +86,7 @@ export default function Section({
               className="flex max-sm:overflow-x-scroll overflow-x-hidden scrollbar-hide overflow-y-hidden gap-5 pt-5 relative transition-all duration-1000 ease-in-out"
               ref={crousalRef}
             >
-              {movies?.data.results.map((movie: MovieProps, index:number) => (
+              {movies?.data.results.map((movie: MovieProps) => (
                 <VerticalCard movie={movie} key={`${movie.id}`} mediaType={mediaType} cn={width} ></VerticalCard>
               ))}
             </div>
@@ -108,15 +103,9 @@ export default function Section({
             </div>
           </div>
         </>
-      ) : (
-        <div className="grid grid-cols-5 w-fit gap-5 auto-cols-fr">
-          {[...Array(5)].map((_, i) => (
-            <SkeletonCard key={i} />
-          ))}
-        </div>
-      )}
+      }
+      
 
-      <></>
     </section>
   );
 }

@@ -76,7 +76,7 @@ export default function Carousel({
     overflow-hidden max-sm:h-[550px] max-lg:h-[750px] "
     >
       <div
-        className="relative w-full h-full  transition-transform duration-300 ease-in-out snap-center  "
+        className="relative w-full h-full  transition-transform duration-300 ease-in-out snap-center"
         ref={crousalRef}
       >
         {movieData.map((movie: MovieProps, index: number) => {
@@ -84,7 +84,7 @@ export default function Carousel({
             <div
               key={movie.id}
               className={cn(
-                `flex flex-col w-full h-full absolute transition-opacity duration-1000 cursor-pointer`,
+                `flex flex-col w-full h-full absolute transition-opacity duration-1000 cursor-pointer ease-in-out`,
                 index === currentIndex ? "opacity-100" : "opacity-0"
               )}
             >

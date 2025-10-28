@@ -234,27 +234,34 @@ export default function ExplorePage() {
 
   return (
     <div className="flex  flex-col  items-center justify-evenly overflow-hidden  ">
-      {!isLoading && (
-        <Carousel
-          movieData={movies?.data.results}
-          autoSlide={true}
-          slideButtons={true}
-          autoSlideInterval={6000}
-        ></Carousel>
+      {!isLoading ? (
+        <>
+          <Carousel
+            movieData={movies?.data.results}
+            autoSlide={true}
+            slideButtons={true}
+            autoSlideInterval={6000}
+          ></Carousel>
+
+          <div className="w-screen px-8  max-sm:px-4  ">
+            {genreSections.map((ctg: categoriesProps) => (
+              <Section
+                queryKey={ctg.queryKey}
+                endpoint={ctg.endpoint}
+                heading={ctg.heading}
+                params={ctg.params}
+                mediaType={ctg.mediaType}
+                key={ctg.queryKey}
+                width={ctg?.width}
+              />
+            ))}
+          </div>
+        </>
+      ) : (
+        <div className="flex justify-center items-center h-screen">
+          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
       )}
-      <div className="w-screen px-8  max-sm:px-4  ">
-        {genreSections.map((ctg: categoriesProps) => (
-          <Section
-            queryKey={ctg.queryKey}
-            endpoint={ctg.endpoint}
-            heading={ctg.heading}
-            params={ctg.params}
-            mediaType={ctg.mediaType}
-            key={ctg.queryKey}
-            width={ctg?.width}
-          />
-        ))}
-      </div>
     </div>
   );
 }

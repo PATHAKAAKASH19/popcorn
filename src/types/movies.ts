@@ -8,7 +8,7 @@ export type MovieProps = {
   release_date: string;
   vote_average: number;
   media_type: string;
-  
+  first_air_date: string;
 };
 
 
