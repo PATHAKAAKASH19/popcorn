@@ -53,8 +53,8 @@ export default function SearchPage() {
   return (
     <div className="w-screen h-screen bg-black p-20  flex  items-center flex-col ">
       <div className="w-6xl flex flex-col ">
-        <div className=" flex  w-full   justify-center items-center  mt-8 mb-3 border  border-gray-500/40 h-fit bg-[#171717]  rounded-2xl">
-          <div className="w-11 h-full flex  justify-center items-center">
+        <div className=" flex  w-full   justify-center items-center  mt-8 mb-3 border  border-gray-500/30 h-fit bg-[#171717]  rounded-2xl">
+          <div className="w-11 h-full flex  justify-center items-center pointer-events-none">
             <IconSearch className="text-white size-4"></IconSearch>
           </div>
           <input
