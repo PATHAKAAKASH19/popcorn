@@ -26,6 +26,7 @@ export default function VerticalCard({ movie , mediaType, cn="w-55"}: MovieCardP
             src={`https://image.tmdb.org/t/p/w780/${movie?.poster_path}`}
             alt="movie-poster"
             className="rounded-xl"
+            loading="lazy"
           />
         </div>
       ) : (

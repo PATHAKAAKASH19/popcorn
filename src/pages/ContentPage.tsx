@@ -78,7 +78,8 @@ export default function ContentPage() {
           <Banner
             backdrop_path={movieDetails?.data.backdrop_path}
             isTrailerArrayEmpty={!!movieTrailer?.data.results.length}
-            togglePlay={togglePlay}
+              togglePlay={togglePlay}
+            
           />
 
           <div className=" w-full  relative bottom-65 px-80  flex flex-col justify-between items-center max-lg:bottom-45 max-sm:px-2 max-sm:bottom-22  max-md:px-10 max-sm:w-full  transition-all duration-500 ease-in-out">
@@ -228,6 +229,7 @@ export default function ContentPage() {
                                     src={`https://image.tmdb.org/t/p/original/${c.profile_path}`}
                                     alt={`${c.name}`}
                                     className="h-full w-full rounded-[50%] object-cover object-top"
+                                    loading="lazy"
                                   />
                                 ) : (
                                   <div className="h-full w-full rounded-[50%] object-cover border-gray-800 bg-gray-900 flex justify-center items-center">
@@ -274,7 +276,8 @@ export default function ContentPage() {
                                   <img
                                     src={`https://image.tmdb.org/t/p/original/${c.profile_path}`}
                                     alt={`${c.name}`}
-                                    className="h-full w-full rounded-[50%] object-cover "
+                                    className="h-full w-full rounded-[50%] object-cover"
+                                    loading="lazy"
                                   />
                                 ) : (
                                   <div

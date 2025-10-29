@@ -135,6 +135,7 @@ export default function SearchPage() {
                               src={`https://image.tmdb.org/t/p/w780/${movie?.poster_path}`}
                               alt={`${movie.title ? movie.title : movie.name}`}
                               className="w-full h-full object-cover rounded-[0.5em]"
+                              loading="lazy"
                             />
                           </div>
                         ) : (

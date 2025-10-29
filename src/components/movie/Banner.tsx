@@ -4,7 +4,8 @@ import {IconPlayerPlay} from "@tabler/icons-react"
 type BannerProps = {
 
     backdrop_path: string,
-    isTrailerArrayEmpty:boolean,
+   isTrailerArrayEmpty: boolean,
+    
     togglePlay?: () => void
 }
 
@@ -14,6 +15,8 @@ export default function Banner({backdrop_path, isTrailerArrayEmpty, togglePlay}:
       <img
         src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
         className="w-full h-full object-cover"
+        alt={"bannerImage"}
+        loading="lazy"
       ></img>
 
       {isTrailerArrayEmpty && (
