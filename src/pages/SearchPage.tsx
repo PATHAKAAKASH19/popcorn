@@ -144,7 +144,7 @@ export default function SearchPage() {
                           <h1 className="text-white text-[14px]">
                             {movie.title ? movie.title : movie.name}
                           </h1>
-                          <h2 className="text-white/50">{movie.genre}</h2>
+                          {/* <h2 className="text-white/50">{movie.release_date}</h2> */}
                         </div>
                       </div>
                     );

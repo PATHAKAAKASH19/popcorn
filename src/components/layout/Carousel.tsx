@@ -3,10 +3,10 @@ import type { MovieProps } from "@/types/movies";
 import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import { useRef, useEffect, useState } from "react";
-import { clsx } from "clsx";
+import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-function cn(...inputs) {
+function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
 }
 

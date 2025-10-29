@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IconSun, IconMoon } from "@tabler/icons-react";
 
 export default function DarkModeToggle() {
