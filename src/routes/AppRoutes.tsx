@@ -4,12 +4,17 @@ import ExplorePage from "@/pages/ExplorePage";
 import SchedulePage from "@/pages/SchedulePage";
 import SearchPage from "@/pages/SearchPage";
 import ContentPage from "@/pages/ContentPage";
+import { Navigate } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
+      {
+        index: true, // default route when path is '/'
+        element: <Navigate to="explore" replace />,
+      },
       {
         path: "explore",
         element: <ExplorePage />,
