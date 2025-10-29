@@ -1,25 +1,26 @@
-import  { useState } from 'react'
-import { Link } from 'react-router-dom';
-import {  IconSearch } from "@tabler/icons-react";
+// import  { useState } from 'react'
+// import { Link } from 'react-router-dom';
+// import {  IconSearch } from "@tabler/icons-react";
 
 export default function SearchToggle() {
 
 
-  const [searchToggle, setSearchToggle] = useState(false)
+  // const [searchToggle, setSearchToggle] = useState(false)
   
-  
+
   return (
-    <div>
-      {searchToggle ? (
-        <Link to="/search">
-          <IconSearch />
-        </Link>
-      ) : (
-          <></>
-        // <Link to={"/explore"}>
-        //   <IconCancle/>
-        // </Link>
-      )}
-    </div>
+    <></>
+    // <div>
+    //   {searchToggle ? (
+    //     <Link to="/search">
+    //       <IconSearch />
+    //     </Link>
+    //   ) : (
+    //       <></>
+    //     // <Link to={"/explore"}>
+    //     //   <IconCancle/>
+    //     // </Link>
+    //   )}
+    // </div>
   );
 }
