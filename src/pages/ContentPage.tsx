@@ -31,7 +31,7 @@ const fetchMovieTrailer = (mediaType: string, movieId: string) => {
   return axios.get(
     `${
       import.meta.env.VITE_BASE_URL
-    }/${mediaType}/${movieId}/videos?api_key=3d14ff1f16210f53dbc54ca2ae5b2ab8`,
+    }/${mediaType}/${movieId}/videos?api_key=${import.meta.env.VITE_API_KEY}`,
     {
       headers: {
         Authorization: `Bearer ${import.meta.env.VITE_API_SECRET}`,
@@ -78,8 +78,7 @@ export default function ContentPage() {
           <Banner
             backdrop_path={movieDetails?.data.backdrop_path}
             isTrailerArrayEmpty={!!movieTrailer?.data.results.length}
-              togglePlay={togglePlay}
-            
+            togglePlay={togglePlay}
           />
 
           <div className=" w-full  relative bottom-65 px-80  flex flex-col justify-between items-center max-lg:bottom-45 max-sm:px-2 max-sm:bottom-22  max-md:px-10 max-sm:w-full  transition-all duration-500 ease-in-out">
@@ -165,7 +164,7 @@ export default function ContentPage() {
               <div className="self-end max-lg:col-span-3 ">
                 <button
                   className="w-full px-5 py-[10px] bg-purple-800 text-white rounded-[2em] cursor-pointer  mb-4 
-            max-sm:py-2 max-sm:text-[12px]"
+            max-sm:py-2 max-sm:text-[12px]  relative z-100"
                 >
                   <div className="flex justify-center items-center gap-1">
                     <IconEye className="size-5  max-sm:size-4"></IconEye>
@@ -174,7 +173,7 @@ export default function ContentPage() {
                 </button>
                 <button
                   className="w-full px-5 py-[10px] bg-gray-900 text-white rounded-[2em] cursor-pointer mb-4
-            max-sm:py-2 max-sm:text-[12px]
+            max-sm:py-2 max-sm:text-[12px] relative z-100
             "
                 >
                   <div className="flex justify-center items-center gap-1">

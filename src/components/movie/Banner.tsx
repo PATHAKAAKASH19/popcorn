@@ -1,15 +1,16 @@
-import {IconPlayerPlay} from "@tabler/icons-react"
-
+import { IconPlayerPlay } from "@tabler/icons-react";
 
 type BannerProps = {
+  backdrop_path: string;
+  isTrailerArrayEmpty: boolean;
+  togglePlay?: () => void;
+};
 
-    backdrop_path: string,
-   isTrailerArrayEmpty: boolean,
-    
-    togglePlay?: () => void
-}
-
-export default function Banner({backdrop_path, isTrailerArrayEmpty, togglePlay}:BannerProps) {
+export default function Banner({
+  backdrop_path,
+  isTrailerArrayEmpty,
+  togglePlay,
+}: BannerProps) {
   return (
     <div className="pt-20 h-[950px] w-full relative aspect-[4/2] max-lg:h-[750px] max-sm:h-[550px] max-sm:pt-15 transition-all duration-500 ease-in-out  shrink-0 ">
       <img

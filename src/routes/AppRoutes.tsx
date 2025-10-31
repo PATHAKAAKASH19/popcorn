@@ -4,6 +4,7 @@ import ExplorePage from "@/pages/ExplorePage";
 import SchedulePage from "@/pages/SchedulePage";
 import SearchPage from "@/pages/SearchPage";
 import ContentPage from "@/pages/ContentPage";
+import UserPage from "@/pages/UserPage";
 import { Navigate } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
             element: <ContentPage />,
           },
         ],
+      },
+      {
+        path: "user",
+        element:<UserPage></UserPage>
       },
     ],
   },
