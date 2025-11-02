@@ -55,10 +55,10 @@ export default function SearchPage() {
 
   console.log(data);
   return (
-    <div className="w-screen h-screen bg-black p-20  flex  items-center flex-col ">
-      <div className="w-6xl flex flex-col ">
-        <div className="pointer-events-auto flex  w-full justify-center items-center  mt-8 border  border-gray-500/30 h-fit bg-[#171717]  rounded-2xl">
-          <div className="w-11 h-full flex  justify-center items-center ">
+    <div className="w-screen h-screen bg-black p-20  flex  items-center flex-col max-sm:px-10 max-sm:py-17 ">
+      <div className="w-6xl flex flex-col max-xl:w-4xl max-lg:w-2xl  max-md:w-md max-sm:w-85 h-full">
+        <div className="pointer-events-auto flex  w-full justify-center items-center  mt-8 border  border-gray-500/30 h-fit bg-[#171717]  rounded-2xl max-md:mt-2  max-sm:rounded-[0.5em]">
+          <div className="w-11 h-full flex  justify-center items-center">
             <IconSearch className="text-white size-4"></IconSearch>
           </div>
           <input
@@ -68,7 +68,8 @@ export default function SearchPage() {
             onChange={handleQuery}
             autoComplete="off"
             placeholder="Search for Movies, Shows, Anime, Cast & Crew..."
-            className=" py-2 bg-[#171717] h-16 rounded-2xl placeholder:text-gray-400 w-full border-none outline-none text-white "
+            className=" py-2 bg-[#171717] h-16 rounded-2xl placeholder:text-gray-400 w-full border-none outline-none
+             text-white max-md:h-13  max-sm:h-11 max-sm:rounded-[0.5em] max-md:text-[13px]"
           />
         </div>
 
@@ -76,9 +77,12 @@ export default function SearchPage() {
           <div className="w-full px-2 pb-4 mt-3">
             <div className="flex  flex-col w-full gap-3">
               <div className="flex justify-between items-center">
-                <h1 className="text-white text-[15px]">RECENT SEARCHES</h1>
+                <h1 className="text-white text-[15px] max-sm:text-[12px]">
+                  RECENT SEARCHES
+                </h1>
                 <h2
-                  className="text-[13px] text-gray-400 cursor-pointer hover:text-white duration-300 transition-colors ease-in-out"
+                  className="text-[13px] text-gray-400 cursor-pointer hover:text-white duration-300 transition-colors 
+                  ease-in-out max-sm:text-[10px]"
                   onClick={clearHistory}
                 >
                   Clear history
@@ -89,10 +93,12 @@ export default function SearchPage() {
                   return (
                     <div
                       key={history}
-                      className="text-white flex justify-center items-center  rounded-full w-fit px-5 py-2 gap-2 bg-[#171717]/90"
+                      className="text-white flex justify-center items-center  rounded-full w-fit px-5 py-2 gap-2 bg-[#171717]/90
+                      max-sm:px-3 "
                     >
                       <h1
-                        className="text-white/50 text-[14px] font-medium cursor-pointer hover:text-white/70 "
+                        className="text-white/50 text-[14px] font-medium cursor-pointer hover:text-white/70  
+                        max-sm:text-[10px] "
                         onClick={() => setQuery(history)}
                       >
                         {history}
@@ -101,7 +107,7 @@ export default function SearchPage() {
                         className="h-full flex justify-center items-center cursor-pointer "
                         onClick={() => deleteHistory(history)}
                       >
-                        <IconX className="size-4 text-white/50 hover:text-white"></IconX>
+                        <IconX className="size-4 text-white/50 hover:text-white max-sm:size-3"></IconX>
                       </div>
                     </div>
                   );
@@ -110,20 +116,20 @@ export default function SearchPage() {
             </div>
           </div>
         )}
-        <div className=" w-full flex border-b border-gray-500/30 items-center mb-5 relative mt-3">
-          <h1 className="text-white border-b-3 font-medium text-[14px] pb-1">
+        <div className="w-full flex border-b border-gray-500/30 items-center mb-5 relative mt-3 max-sm:mt-2 max-sm:mb-4">
+          <h1 className="text-white border-b-3 font-medium text-[14px] pb-1 max-sm:text-[12px] max-sm:border-b-2">
             Content
           </h1>
         </div>
         {query && (
-          <div className="  flex justify-center  flex-col ">
-            <div className="flex flex-col justify-start h-155 ">
-              <h1 className="text-gray-400 font-medium  pb-4 text-[15px]">
+          <div className="  flex   flex-col h-full overflow-auto scrollbar-hide">
+            <div className="flex flex-col justify-start   ">
+              <h1 className="text-gray-400 font-medium  pb-4 text-[15px] max-sm:text-[13px]">
                 SEARCH RESULTS
               </h1>
               {isLoading ? (
-                <div className="grid grid-cols-4 gap-4 overflow-auto scrollbar-hide">
-                  {Array.from({ length: 5 }).map((_, i: number) => {
+                <div className="grid grid-cols-4 gap-4 overflow-auto scrollbar-hide max-xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1">
+                  {Array.from({ length: 12 }).map((_, i: number) => {
                     return (
                       <div
                         key={i}
@@ -131,19 +137,19 @@ export default function SearchPage() {
                     hover:bg-[#1F1F1F] cursor-pointer transition-colors duration-500 ease-in-out"
                       >
                         <div className=" w-20 rounded-[0.5em]  shrink-0 h-28">
-                          <Skeleton className="h-28 w-20 rounded-[0.5em] " />
+                          <Skeleton className="h-28 w-20 rounded-[0.5em] bg-gray-500/50 " />
                         </div>
 
                         <div className="space-y-2">
-                          <Skeleton className="h-4 w-fit" />
-                          <Skeleton className="h-4 w-fit" />
+                          <Skeleton className="h-4 w-35 bg-gray-500/50" />
+                          <Skeleton className="h-4 w-25 bg-gray-500/50" />
                         </div>
                       </div>
                     );
                   })}
                 </div>
               ) : (
-                <div className="grid grid-cols-4 gap-4 overflow-auto scrollbar-hide ">
+                <div className="grid grid-cols-4 gap-4 overflow-auto scrollbar-hide max-xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1">
                   {data?.map((movie: MovieProps) => {
                     return (
                       <div
@@ -169,11 +175,11 @@ export default function SearchPage() {
                         ) : (
                           <div className=" w-20 rounded-[0.5em]  shrink-0 h-28 bg-gradient-to-b from-gray-400/30 to-gray-400/10"></div>
                         )}
-                        <div className="">
-                          <h1 className="text-white text-[14px]">
+                        <div className="flex flex-col gap-1">
+                          <h1 className="text-white text-[15px]">
                             {movie.title ? movie.title : movie.name}
                           </h1>
-                          {/* <h2 className="text-white/50">{movie.release_date}</h2> */}
+                          <h2 className="text-white/50 text-[13px]">{movie.media_type}</h2>
                         </div>
                       </div>
                     );

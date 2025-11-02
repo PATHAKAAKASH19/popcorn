@@ -6,26 +6,27 @@ import type { MovieProps } from "@/types/movies";
 type MovieCardProp = {
   movie: MovieProps,
   mediaType?: string,
-  cn?:string
+  cn?: string, 
+  h?:string
 }
 
 
-export default function VerticalCard({ movie , mediaType, cn="w-55"}: MovieCardProp) {
+export default function VerticalCard({ movie , mediaType, cn="w-55", h}: MovieCardProp) {
   
   console.log(movie)
   return (
     <Link
       to={`/${mediaType}/${movie.id}`}
       className={`rounded-xl  flex flex-col gap-3 pb-4 backdrop-blur hover:scale-110 transition-transform duration-300 ease-in-out 
-      shrink-0 max-sm:w-33 ${cn}`}
+      shrink-0 max-sm:w-33 ${cn} `}
       key={movie.title ? movie.title : movie?.name}
     >
       {movie.poster_path ? (
-        <div>
+        <div className={`${h}`}>
           <img
             src={`https://image.tmdb.org/t/p/w780/${movie?.poster_path}`}
             alt="movie-poster"
-            className="rounded-xl"
+            className="rounded-xl h-full w-full"
             loading="lazy"
           />
         </div>

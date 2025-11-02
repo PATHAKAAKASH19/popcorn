@@ -72,7 +72,7 @@ export default function Carousel({
 
   return (
     <div
-      className="w-screen h-[950px]   relative flex flex-col hover:bg-white/10 duration-300 ease-in-out group 
+      className="w-screen h-[950px]   relative flex flex-col duration-300 ease-in-out group 
     overflow-hidden max-sm:h-[550px] max-lg:h-[750px] "
     >
       <div
@@ -84,7 +84,7 @@ export default function Carousel({
             <div
               key={movie.id}
               className={cn(
-                `flex flex-col w-full h-full absolute transition-opacity duration-1000 cursor-pointer ease-in-out`,
+                `flex flex-col w-full h-full absolute transition-opacity duration-1000 cursor-pointer ease-in-out `,
                 index === currentIndex ? "opacity-100" : "opacity-0"
               )}
             >
@@ -95,13 +95,13 @@ export default function Carousel({
               <div className="absolute bottom-15 left-40 w-4xl max-xl:left-20 max-xl:w-3xl  max-lg:left-10 max-lg:w-xl max-sm:bottom-0  max-sm:left-0 max-sm:px-4 max-sm:w-auto">
                 <h1
                   className="text-white text-5xl font-medium pb-4 max-lg:text-3xl 
-                      max-sm:text-[20px] max-sm:pb-2 "
+                      max-sm:text-[19px] max-sm:pb-2 "
                 >
                   {movie.title ? movie.title : movie.name}
                 </h1>
-                <div className=" pb-8 max-sm:pb-4">
+                <div className=" pb-8 max-sm:pb-3">
                   <p
-                    className="line-clamp-3  text-gray-300 text-lg max-lg:text-[16px] max-sm:text-[13px]
+                    className="line-clamp-3  text-gray-300/70 text-lg max-lg:text-[16px] max-sm:text-[14px]
                        h-auto "
                   >
                     {movie.overview}
@@ -111,9 +111,9 @@ export default function Carousel({
                   type="button"
                   className=" px-6 py-2 rounded-[0.5em] text-[18px] bg-gradient-to-br from-blue-800  to-black/10 hover:from-blue-500
                         text-white font-medium cursor-pointer  hover:scale-110 transition-transform duration-500 ease-in-out
-                       max-sm:px-3 max-sm:py-2 max-sm:text-[14px] relative z-30 
+                       max-sm:px-3 max-sm:py-2 max-sm:text-[11px] relative z-30 
                        "
-                  onClick={() => handleNavigation(`/movie/${movie.id}`)}
+                  onClick={() => handleNavigation(`/${movie.media_type}/${movie.id}`)}
                 >
                   See Details
                 </button>

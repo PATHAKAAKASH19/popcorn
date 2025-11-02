@@ -43,7 +43,6 @@ const fetchMovieTrailer = (mediaType: string, movieId: string) => {
 export default function ContentPage() {
   const { mediaType, movieId } = useParams();
 
-  console.log(movieId, mediaType);
   const { data: movieDetails, isLoading } = useQuery({
     queryKey: ["movie-details", movieId],
     queryFn: () => fetchMovieDatails(mediaType!, movieId!),
@@ -63,8 +62,6 @@ export default function ContentPage() {
     setPlayTrailer((prev) => !prev);
   };
 
-  console.log("trailer", movieTrailer);
-  console.log("details", movieDetails);
   return (
     <>
       {isLoading ? (
@@ -81,10 +78,10 @@ export default function ContentPage() {
             togglePlay={togglePlay}
           />
 
-          <div className=" w-full  relative bottom-65 px-80  flex flex-col justify-between items-center max-lg:bottom-45 max-sm:px-2 max-sm:bottom-22  max-md:px-10 max-sm:w-full  transition-all duration-500 ease-in-out">
+          <div className=" w-full  relative bottom-65 px-80  flex flex-col justify-between items-center max-lg:bottom-45 max-sm:px-2 max-sm:bottom-16  max-md:px-10 max-sm:w-full  transition-all duration-500 ease-in-out">
             <div
               className="grid grid-cols-4 w-6xl mb-6 gap-10 max-xl:w-4xl max-lg:grid-cols-3  
-        max-lg:w-2xl max-md:w-xl max-md:gap-x-30  max-sm:w-fit max-sm:gap-x-12 max-sm:gap-y-9 max-sm:mb-0
+        max-lg:w-2xl max-md:w-xl max-md:gap-x-30  max-sm:w-fit max-sm:gap-x-18 max-sm:gap-y-7 max-sm:mb-0
         
         "
             >
@@ -113,7 +110,7 @@ export default function ContentPage() {
                       : movieDetails?.data.name}
                   </h1>
                 </div>
-                <div className="grid-cols-5 grid  mt-10 gap-4  max-md:mt-8 max-md:grid-cols-4 max-sm:gap-10  max-xl:gap-15">
+                <div className="grid-cols-5 grid  mt-10 gap-4  max-md:mt-8 max-sm:grid-cols-2 max-sm:gap-x-5 max-sm:gap-y-3 max-xl:gap-15 max-sm:mt-5  max-lg:grid-cols-4">
                   <div className="justify-self-start">
                     <h3 className="text-gray-400 text-[13px] pb-1 line-clamp-1 max-sm:text-[11px]">
                       Directed by
@@ -164,7 +161,7 @@ export default function ContentPage() {
               <div className="self-end max-lg:col-span-3 ">
                 <button
                   className="w-full px-5 py-[10px] bg-purple-800 text-white rounded-[2em] cursor-pointer  mb-4 
-            max-sm:py-2 max-sm:text-[12px]  relative z-100"
+            max-sm:py-3 max-sm:text-[12px]  relative z-100"
                 >
                   <div className="flex justify-center items-center gap-1">
                     <IconEye className="size-5  max-sm:size-4"></IconEye>
@@ -173,7 +170,7 @@ export default function ContentPage() {
                 </button>
                 <button
                   className="w-full px-5 py-[10px] bg-gray-900 text-white rounded-[2em] cursor-pointer mb-4
-            max-sm:py-2 max-sm:text-[12px] relative z-100
+            max-sm:py-3 max-sm:text-[12px] relative z-100
             "
                 >
                   <div className="flex justify-center items-center gap-1">

@@ -232,6 +232,7 @@ export default function ExplorePage() {
     },
   ];
 
+  console.log(movies)
   return (
     <div className="flex  flex-col  items-center justify-evenly overflow-hidden  ">
       {!isLoading ? (

@@ -53,3 +53,10 @@ export type GenerProps = {
   id: number;
   name: string;
 };
+
+
+export type UrlProps = {
+  type: string;
+  movieUrl: string;
+  showUrl: string;
+};

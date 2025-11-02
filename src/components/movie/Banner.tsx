@@ -12,10 +12,10 @@ export default function Banner({
   togglePlay,
 }: BannerProps) {
   return (
-    <div className="pt-20 h-[950px] w-full relative aspect-[4/2] max-lg:h-[750px] max-sm:h-[550px] max-sm:pt-15 transition-all duration-500 ease-in-out  shrink-0 ">
+    <div className="pt-20 h-[950px] w-full relative aspect-[4/2] max-lg:h-[750px] max-sm:h-[450px] max-sm:pt-15 transition-all duration-500 ease-in-out  shrink-0  ">
       <img
         src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover max-sm:object-center"
         alt={"bannerImage"}
         loading="lazy"
       ></img>
@@ -23,10 +23,10 @@ export default function Banner({
       {isTrailerArrayEmpty && (
         <div className="absolute top-0 z-30 w-full h-[950px] flex justify-center items-center">
           <div
-            className="relative bottom-15 rounded-[50%] h-15 w-15 flex justify-center items-center backdrop-blur bg-black/20 cursor-pointer hover:scale-110 transition-transform duration-300 hover:shadow-lg hover:shadow-black max-md:bottom-30 max-sm:bottom-50 max-sm:size-13"
+            className="relative bottom-15 rounded-[50%] h-15 w-15 flex justify-center items-center backdrop-blur bg-black/20 cursor-pointer hover:scale-110 transition-transform duration-300 hover:shadow-lg hover:shadow-black max-md:bottom-30 max-sm:bottom-65 max-sm:size-11 "
             onClick={togglePlay}
           >
-            <IconPlayerPlay className="fill-white text-white" />
+            <IconPlayerPlay className="fill-white text-white max-sm:size-4" />
           </div>
         </div>
       )}
