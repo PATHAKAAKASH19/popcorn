@@ -5,6 +5,8 @@ import SchedulePage from "@/pages/SchedulePage";
 import SearchPage from "@/pages/SearchPage";
 import ContentPage from "@/pages/ContentPage";
 import UserPage from "@/pages/UserPage";
+import Watched from "@/components/layout/Watched";
+import BookMark from "@/components/layout/BookMark";
 import { Navigate } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -41,8 +43,24 @@ const router = createBrowserRouter([
       },
       {
         path: "user",
-        element:<UserPage></UserPage>
+        element: <UserPage></UserPage>,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="watched" replace/>,
+          },
+          {
+            path: "bookmark",
+            element:<BookMark/>,
+          },
+          {
+            path: "watched",
+            element:<Watched/>
+          }
+        ]
       },
+
+      
     ],
   },
 ]);

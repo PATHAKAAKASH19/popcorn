@@ -31,7 +31,7 @@ export default function Navbar() {
             <IconCalendar className="text-gray-400 size-5 hover:scale-120 transition-transform duration-300 hover:cursor-pointer  hover:text-white" />
           </Link>
 
-          <Link to="/user" className="max-sm:hidden">
+          <Link to="/user/watched" className="max-sm:hidden">
             <IconUser className="text-gray-400 size-5 hover:scale-120 transition-transform duration-300 hover:cursor-pointer  hover:text-white" />
           </Link>
           <Link to="/search">

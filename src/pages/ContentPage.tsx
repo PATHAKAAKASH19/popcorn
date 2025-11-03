@@ -13,6 +13,7 @@ import axios from "axios";
 import VerticalCard from "@/components/movie/VerticalCard";
 import Player from "@/components/movie/Player";
 import Banner from "@/components/movie/Banner";
+import useUser from "@/stores/userStore";
 
 const fetchMovieDatails = (mediaType: string, movieId: string) => {
   return axios.get(
@@ -57,10 +58,13 @@ export default function ContentPage() {
   });
 
   const [playTrailer, setPlayTrailer] = useState(false);
+  const {addMovie} = useUser(state => state)
 
   const togglePlay = () => {
     setPlayTrailer((prev) => !prev);
   };
+
+  
 
   return (
     <>
@@ -160,20 +164,50 @@ export default function ContentPage() {
 
               <div className="self-end max-lg:col-span-3 ">
                 <button
-                  className="w-full px-5 py-[10px] bg-purple-800 text-white rounded-[2em] cursor-pointer  mb-4 
-            max-sm:py-3 max-sm:text-[12px]  relative z-100"
+                    className={`w-full px-5 py-[10px] bg-purple-800 text-white rounded-[2em] cursor-pointer  mb-4 
+            max-sm:py-3 max-sm:text-[12px]  relative z-100 hover:scale-110 transition-tansform duration-300 
+            ease-in-out`}
                 >
-                  <div className="flex justify-center items-center gap-1">
+                  <div
+                    className="flex justify-center items-center gap-1"
+                    onClick={() =>
+                      addMovie(
+                        {
+                          id: movieId!,
+                          poster_path: movieDetails?.data.poster_path,
+                          mediaType: mediaType!,
+                          name: movieDetails?.data.name
+                            ? movieDetails?.data.name
+                            : movieDetails?.data.title,
+                        },
+                        "watched"
+                      )
+                    }
+                  >
                     <IconEye className="size-5  max-sm:size-4"></IconEye>
                     <h1> Mark as Watched</h1>
                   </div>
                 </button>
                 <button
-                  className="w-full px-5 py-[10px] bg-gray-900 text-white rounded-[2em] cursor-pointer mb-4
-            max-sm:py-3 max-sm:text-[12px] relative z-100
-            "
+                    className={`w-full px-5 py-[10px] bg-gray-900 text-white rounded-[2em] cursor-pointer mb-4
+            max-sm:py-3 max-sm:text-[12px] relative z-100  hover:scale-110 transition-tansform duration-300 ease-in-out `}
                 >
-                  <div className="flex justify-center items-center gap-1">
+                  <div
+                    className="flex justify-center items-center gap-1"
+                    onClick={() =>
+                      addMovie(
+                        {
+                          id: movieId!,
+                          poster_path: movieDetails?.data.poster_path,
+                          mediaType: mediaType!,
+                          name: movieDetails?.data.name
+                            ? movieDetails?.data.name
+                            : movieDetails?.data.title,
+                        },
+                        "bookmark"
+                      )
+                    }
+                  >
                     <IconBookmark className="size-5  max-sm:size-4"></IconBookmark>
                     <h1>BookMark</h1>
                   </div>
