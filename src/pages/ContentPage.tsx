@@ -30,9 +30,9 @@ const fetchMovieDatails = (mediaType: string, movieId: string) => {
 
 const fetchMovieTrailer = (mediaType: string, movieId: string) => {
   return axios.get(
-    `${
-      import.meta.env.VITE_BASE_URL
-    }/${mediaType}/${movieId}/videos?api_key=${import.meta.env.VITE_API_KEY}`,
+    `${import.meta.env.VITE_BASE_URL}/${mediaType}/${movieId}/videos?api_key=${
+      import.meta.env.VITE_API_KEY
+    }`,
     {
       headers: {
         Authorization: `Bearer ${import.meta.env.VITE_API_SECRET}`,
@@ -58,13 +58,11 @@ export default function ContentPage() {
   });
 
   const [playTrailer, setPlayTrailer] = useState(false);
-  const {addMovie} = useUser(state => state)
+  const { addMovie, userMovieList} = useUser((state) => state);
 
   const togglePlay = () => {
     setPlayTrailer((prev) => !prev);
   };
-
-  
 
   return (
     <>
@@ -74,7 +72,7 @@ export default function ContentPage() {
         </div>
       ) : (
         <div
-          className={`w-full  flex flex-col bg-black overflow-y-hidden transition-all duration-500 ease-in-out`}
+          className={`w-full  flex flex-col bg-black overflow-y-hidden transition-all duration-500 ease-in-out `}
         >
           <Banner
             backdrop_path={movieDetails?.data.backdrop_path}
@@ -164,7 +162,7 @@ export default function ContentPage() {
 
               <div className="self-end max-lg:col-span-3 ">
                 <button
-                    className={`w-full px-5 py-[10px] bg-purple-800 text-white rounded-[2em] cursor-pointer  mb-4 
+                  className={`w-full px-5 py-[10px] bg-purple-800 text-white rounded-[2em] cursor-pointer  mb-4 
             max-sm:py-3 max-sm:text-[12px]  relative z-100 hover:scale-110 transition-tansform duration-300 
             ease-in-out`}
                 >
@@ -189,7 +187,7 @@ export default function ContentPage() {
                   </div>
                 </button>
                 <button
-                    className={`w-full px-5 py-[10px] bg-gray-900 text-white rounded-[2em] cursor-pointer mb-4
+                  className={`w-full px-5 py-[10px] bg-gray-900 text-white rounded-[2em] cursor-pointer mb-4
             max-sm:py-3 max-sm:text-[12px] relative z-100  hover:scale-110 transition-tansform duration-300 ease-in-out `}
                 >
                   <div
@@ -208,7 +206,8 @@ export default function ContentPage() {
                       )
                     }
                   >
-                    <IconBookmark className="size-5  max-sm:size-4"></IconBookmark>
+                      <IconBookmark className={`size-5  max-sm:size-4 fill-blue-700 
+                        ${userMovieList.bookmark.find()}`}></IconBookmark>
                     <h1>BookMark</h1>
                   </div>
                 </button>
@@ -216,28 +215,30 @@ export default function ContentPage() {
             </div>
 
             <div className="flex flex-col gap-10  w-5xl max-xl:w-4xl max-lg:w-2xl max-md:w-xl max-sm:w-full max-sm:gap-6 max-sm:px-2">
-              <div>
-                <h1 className="text-white text-2xl font-medium pt-8 pb-4 max-sm:text-[17px] max-sm:py-3">
-                  Overview
-                </h1>
-                <p className="text-gray-400 text-[16px] pb-5 max-sm:text-[13px]">
-                  {movieDetails?.data.overview}
-                </p>
+              {movieDetails?.data.overview && (
+                <div>
+                  <h1 className="text-white text-2xl font-medium pt-8 pb-4 max-sm:text-[17px] max-sm:py-3">
+                    Overview
+                  </h1>
+                  <p className="text-gray-400 text-[16px] pb-5 max-sm:text-[13px]">
+                    {movieDetails?.data.overview}
+                  </p>
 
-                <div className="flex gap-4 max-sm:gap-2">
-                  {movieDetails?.data.genres.map((gener: GenerProps) => {
-                    return (
-                      <h1
-                        className="text-white text-center px-4 py-2 rounded-xl bg-gray-800 text-[14px] max-sm:text-[11px]"
-                        key={`${gener.name}`}
-                      >
-                        {gener.name}
-                      </h1>
-                    );
-                  })}
+                  <div className="flex gap-4 max-sm:gap-2">
+                    {movieDetails?.data.genres.map((gener: GenerProps) => {
+                      return (
+                        <h1
+                          className="text-white text-center px-4 py-2 rounded-xl bg-gray-800 text-[14px] max-sm:text-[11px]"
+                          key={`${gener.name}`}
+                        >
+                          {gener.name}
+                        </h1>
+                      );
+                    })}
+                  </div>
+                  <div className="w-full border-b border-gray-800 pb-8"></div>
                 </div>
-              </div>
-              <div className="w-full border-b border-gray-800 "></div>
+              )}
               {movieDetails?.data.credits.cast.length && (
                 <>
                   <div>
@@ -281,13 +282,12 @@ export default function ContentPage() {
                           );
                         })}
                     </div>
+                    <div className="w-full border-b border-gray-800 pb-8"></div>
                   </div>
                 </>
               )}
-
               {movieDetails?.data.credits.crew.length && (
                 <>
-                  <div className="w-full border-b border-gray-800 "></div>
                   <div>
                     <h1 className="text-white  text-2xl pb-5 font-medium max-sm:text-[18px]">
                       Crew
@@ -332,36 +332,35 @@ export default function ContentPage() {
                           );
                         })}
                     </div>
+                    <div className="w-full border-b border-gray-800 pb-8"></div>
                   </div>
                 </>
               )}
+              {movieDetails?.data.production_companies.length && (
+                <div>
+                  <h1 className="text-white text-2xl font-medium pb-5 max-sm:text-[17px]">
+                    Production House
+                  </h1>
 
-              <div className="w-full border-b border-gray-800 "></div>
-              <div>
-                <h1 className="text-white text-2xl font-medium pb-5 max-sm:text-[17px]">
-                  Production House
-                </h1>
-
-                <div className="flex gap-2 flex-wrap">
-                  {movieDetails?.data.production_companies.map(
-                    (c: CompanyProps) => {
-                      return (
-                        <div
-                          className="py-2 px-4  bg-gray-800 rounded-2xl"
-                          key={c.name}
-                        >
-                          <h2 className="text-white text-[14px] max-sm:text-[11px]">
-                            {c.name}
-                          </h2>
-                        </div>
-                      );
-                    }
-                  )}
+                  <div className="flex gap-2 flex-wrap">
+                    {movieDetails?.data.production_companies.map(
+                      (c: CompanyProps) => {
+                        return (
+                          <div
+                            className="py-2 px-4  bg-gray-800 rounded-2xl"
+                            key={c.name}
+                          >
+                            <h2 className="text-white text-[14px] max-sm:text-[11px]">
+                              {c.name}
+                            </h2>
+                          </div>
+                        );
+                      }
+                    )}
+                  </div>
+                  <div className="w-full border-b border-gray-800 pb-8"></div>
                 </div>
-              </div>
-
-              <div className="w-full border-b border-gray-800 "></div>
-
+              )}
               {movieDetails?.data.similar.results.length && (
                 <div className=" h-80  ">
                   <h1 className="text-white text-2xl font-medium pb-5 max-sm:text-[17px]">
@@ -370,7 +369,7 @@ export default function ContentPage() {
 
                   <div
                     className="flex pt-5 gap-5 justify-between overflow-x-auto  scrollbar-hide scroll-smooth 
-               max-sm:pt-1 overflow-y-hidden"
+               max-sm:pt-1 overflow-y-hidden transition-all duration-500 ease-in-out"
                   >
                     {movieDetails?.data.similar.results
                       .slice(0, 5)

@@ -56,7 +56,7 @@ export default function SearchPage() {
   console.log(data);
   return (
     <div className="w-screen h-screen bg-black p-20  flex  items-center flex-col max-sm:px-10 max-sm:py-17 ">
-      <div className="w-6xl flex flex-col max-xl:w-4xl max-lg:w-2xl  max-md:w-md max-sm:w-85 h-full">
+      <div className="w-6xl flex flex-col max-xl:w-4xl max-lg:w-2xl  max-md:w-md max-sm:w-85 h-full transition-all duration-500 ease-in-out">
         <div className="pointer-events-auto flex  w-full justify-center items-center  mt-8 border  border-gray-500/30 h-fit bg-[#171717]  rounded-2xl max-md:mt-2  max-sm:rounded-[0.5em]">
           <div className="w-11 h-full flex  justify-center items-center">
             <IconSearch className="text-white size-4"></IconSearch>
@@ -179,7 +179,9 @@ export default function SearchPage() {
                           <h1 className="text-white text-[15px]">
                             {movie.title ? movie.title : movie.name}
                           </h1>
-                          <h2 className="text-white/50 text-[13px]">{movie.media_type}</h2>
+                          <h2 className="text-white/50 text-[13px]">
+                            {movie.media_type}
+                          </h2>
                         </div>
                       </div>
                     );

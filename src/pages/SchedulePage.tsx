@@ -47,39 +47,52 @@ export default function SchedulePage() {
   };
 
   return (
-    <div className="py-30 flex justify-center ">
-      <div className="flex justify-center w-full  gap-4 relative max-md:flex-col max-md:items-center">
+    <div className="pt-30 flex justify-center max-md:pt-15 w-screen h-screen ">
+      <div className="flex justify-center w-full  gap-4  max-md:flex-col max-md:items-center px-2 max-sm:gap-0  relative ">
         <div
           className="w-70 flex flex-col justify-evenly items-center bg-gray-500/20  
-        rounded-[1em] h-45 sticky top-30 max-lg:w-60 max-md:flex-row max-md:h-15 max-md:w-full max-md:top-20 z-10 "
+        rounded-[1em] h-40 max-lg:w-60 max-md:flex-row max-md:h-13 max-md:w-full transition-all duration-500 ease-in-out max-sm:h-12 mb-5  max-sm:top-15 max-sm:mb-5 sticky top-20"
         >
           <h1
-            className={`text-white cursor-pointer  py-2  text-[16px]  w-full h-full
-            flex justify-center items-center rounded-[1em] ${
-              filter === "released" ? "border-gray-500/50 border" : ""
-            }`}
+            className={` cursor-pointer  py-0  text-[16px]  w-full h-full
+            flex justify-center items-center  ${
+              filter === "released"
+                ? "bg-white text-black rounded-[0.5em]"
+                : "text-white bg-gray-500/20"
+            } max-sm:text-[13px] max-md:py-2`}
             onClick={() => handleFilter("released")}
           >
             Released
           </h1>
           <h1
-            className={`text-white py-2 text-[16px] w-full flex  cursor-pointer justify-center items-center rounded-[1em] h-full ${
-              filter === "today-released" ? "border-gray-500/50 border" : ""
-            }`}
+            className={` py-0 text-[16px] w-full flex  cursor-pointer justify-center items-center  h-full ${
+              filter === "today-released"
+                ? "bg-white text-black rounded-[0.5em]"
+                : "text-white bg-gray-500/20"
+            } max-sm:text-[13px]  max-md:py-2`}
             onClick={() => handleFilter("today-released")}
           >
             Today Released
           </h1>
           <h1
-            className={`text-white py-2 text-[16px] w-full flex justify-center items-center rounded-[1em] h-full  cursor-pointer ${
-              filter === "upcoming" ? "border-gray-500/50 border" : ""
-            }`}
+            className={` py-0 text-[16px] w-full flex justify-center items-center h-full  cursor-pointer ${
+              filter === "upcoming"
+                ? "bg-white text-black rounded-[0.5em]"
+                : "text-white bg-gray-500/20"
+            } max-sm:text-[13px]  max-md:py-2`}
             onClick={() => handleFilter("upcoming")}
           >
             upcoming
           </h1>
         </div>
-        {url && <ScheduleSection urlObj={url} />}
+        {url && (
+          <div
+            className="overflow-y-scroll scrollbar-hide w-fit max-md:w-fit  max-md:h-fit max-sm:sticky 
+          max-sm:top-70"
+          >
+            <ScheduleSection urlObj={url} />
+          </div>
+        )}
       </div>
     </div>
   );

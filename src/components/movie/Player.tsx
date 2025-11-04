@@ -10,7 +10,7 @@ type PlayerProps = {
 
 export default function Player({trailerId, title,togglePlay}:PlayerProps) {
   return (
-    <div className="fixed w-screen h-screen z-50 flex justify-center items-center bg-black/90  ">
+    <div className="fixed w-screen h-screen z-800 flex justify-center items-center bg-black/90  ">
       <IconX
         className="text-white/80 absolute top-10 right-15 size-8 cursor-pointer hover:scale-110 transition-transform duration-300 hover:text-white  max-md:size-7 max-sm:size-6 max-sm:right-5 max-sm:top-6"
         onClick={togglePlay}

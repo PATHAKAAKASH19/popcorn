@@ -80,38 +80,41 @@ export default function ScheduleSection({ urlObj }: ScheduleSectionProps) {
   return (
     <>
       {isLoading ? (
-        <div className="grid grid-cols-4 w-4xl gap-x-4 gap-y-8">
+        <div className="grid grid-cols-4 w-4xl gap-x-4 gap-y-8  transition-all duration-500 ease-in-out max-xl:w-2xl max-xl:grid-cols-3 max-lg:grid-cols-2 max-lg:w-lg max-md:grid-cols-3 max-md:w-full max-sm:grid-cols-2 ">
           {Array.from({ length: 12 }).map((_, index: number) => (
-            <div className="flex flex-col gap-3" key={index}>
-              <Skeleton className="w-50 h-60 bg-gray-500/50  rounded-[1em]" />
-              <Skeleton className="w-48 h-5 bg-gray-500/50" />
-              <Skeleton className="w-40 h-5 bg-gray-500/50" />
+            <div className="flex flex-col gap-3 max-sm:gap-2" key={index}>
+              <Skeleton className="w-50 h-60 bg-gray-500/50  rounded-[1em] max-sm:w-40 max-sm:h-50" />
+              <Skeleton className="w-48 h-5 bg-gray-500/50 max-sm:w-37 max-sm:h-3" />
+              <Skeleton className="w-40 h-5 bg-gray-500/50 max-sm:w-30 max-sm:h-3" />
             </div>
           ))}
         </div>
       ) : (
-        <div className="flex gap-3 flex-col">
+        <div className="flex gap-3 flex-col items-center   transition-all duration-500 ease-in-out max-md:w-full max-md:px-2">
           {data.map((obj) => (
-            <div className="flex  gap-3 mb-8">
+            <div className="flex  gap-1 mb-8  max-sm:w-full max-sm:mb-0">
               <div
                 className="w-15 h-fit flex flex-col justify-center items-center py-2 px-2 rounded-xl bg-gray-500/20 
-              border-gray-500/70 "
+              border-gray-500/70  max-sm:w-12"
               >
                 {getDate(obj.date).map((data) => {
                   return (
-                    <h1 className="text-gray-400/90 text-[14px] ">{data}</h1>
+                    <h1 className="text-gray-400/90 text-[14px] max-sm:text-[12px]">{data}</h1>
                   );
                 })}
               </div>
-                  <div className="grid grid-cols-4 w-3xl  gap-y-8 max-xl:w-xl max-xl:grid-cols-3 
-              max-md:border max-lg:w-sm max-lg:grid-cols-2 max-md:w-auto max-md:grid-cols-3">
+              <div
+                className="grid grid-cols-4 w-3xl gap-x-4 gap-y-8 max-xl:w-xl max-xl:grid-cols-3 
+                max-md:gap-x-4 max-lg:w-full max-lg:grid-cols-2  max-md:grid-cols-3 max-sm:grid-cols-2 
+                transition-all duration-500 ease-in-out max-sm:gap-y-3 max-sm:gap-x-2 "
+              >
                 {obj.data.map((movie: MovieProps) => (
                   <VerticalCard
                     movie={movie}
                     mediaType={movie.media_type}
                     key={movie.id}
-                    cn="w-45"
-                    h="h-65"
+                    cn="w-45 "
+                    h="h-65 max-sm:h-50 max-lg:h-55"
                   />
                 ))}
               </div>

@@ -1,9 +1,10 @@
 
 import useUser from "@/stores/userStore";
 import { useNavigate } from "react-router-dom";
+import { IconSquareRoundedPlus } from "@tabler/icons-react";
 
 export default function Watched() {
-  const { bookmark } = useUser((state) => state.userMovieList);
+  const { watched } = useUser((state) => state.userMovieList);
   const { deleteAll, deleteMovie } = useUser((state) => state);
 
   const navigate = useNavigate();
@@ -12,7 +13,13 @@ export default function Watched() {
     navigate(route);
   };
 
+  const navigateToHomePage = () => {
+    navigate("/explore");
+  };
+
   return (
+      <>
+        {watched.length ? (
     <div className="flex flex-col">
       <div className="flex justify-end pb-3">
         <h1
@@ -24,7 +31,7 @@ export default function Watched() {
         </h1>
       </div>
       <div className="grid  grid-cols-4 gap-x-4 gap-y-4 max-xl:grid-cols-2 max-md:grid-cols-1">
-        {bookmark.map((movie) => (
+        {watched.map((movie) => (
           <div
             key={movie.id}
             className="flex  items-center px-3 py-3 rounded-[1em] gap-4 bg-[#1F1F1F]/90 
@@ -72,6 +79,14 @@ export default function Watched() {
           </div>
         ))}
       </div>
-    </div>
+    </div>):(
+          <div className="flex h-99 justify-center items-center flex-col gap-2">
+            <div className="cursor-pointer">
+              <IconSquareRoundedPlus className="text-gray-300/80 size-10 " onClick={navigateToHomePage}></IconSquareRoundedPlus>
+            </div>
+            <h1 className="text-gray-400/80 text-[15px]">Add your favourite movie to watched list</h1>
+          </div>
+        )}
+      </>
   );
 }

@@ -31,7 +31,7 @@ export default function VerticalCard({ movie , mediaType, cn="w-55", h}: MovieCa
           />
         </div>
       ) : (
-        <div className="w-full bg-gray-800 h-full rounded-[1em] flex justify-center items-center  text-gray-300">
+          <div className={`w-full bg-gray-800 h-full rounded-[1em] flex justify-center items-center  text-gray-300 ${h}`}>
           <h1 className="p-2 text-center">{movie.title ? movie.title : movie.name}</h1>
         </div>
       )}

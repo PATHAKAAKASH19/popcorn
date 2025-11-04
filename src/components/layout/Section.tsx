@@ -68,7 +68,7 @@ export default function Section({
 
 
   return (
-    <section className="mb-3  max-sm:mb-0 transition-transform duration-300 ease-in-out" ref={ref}>
+    <section className="mb-3  max-sm:mb-0 transition-all duration-500 ease-in-out" ref={ref}>
       {
         <>
           <h1 className="pt-8 pb-5 text-2xl font-open-sans font-medium text-white max-sm:text-[17px] max-sm:pb-0">
