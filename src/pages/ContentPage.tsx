@@ -58,7 +58,7 @@ export default function ContentPage() {
   });
 
   const [playTrailer, setPlayTrailer] = useState(false);
-  const { addMovie, userMovieList} = useUser((state) => state);
+  const { addMovie } = useUser((state) => state);
 
   const togglePlay = () => {
     setPlayTrailer((prev) => !prev);
@@ -206,8 +206,7 @@ export default function ContentPage() {
                       )
                     }
                   >
-                      <IconBookmark className={`size-5  max-sm:size-4 fill-blue-700 
-                        ${userMovieList.bookmark.find()}`}></IconBookmark>
+                      <IconBookmark className={`size-5  max-sm:size-4 fill-blue-700 `}></IconBookmark>
                     <h1>BookMark</h1>
                   </div>
                 </button>
