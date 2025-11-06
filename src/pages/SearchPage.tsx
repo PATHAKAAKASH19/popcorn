@@ -173,7 +173,7 @@ export default function SearchPage() {
                             />
                           </div>
                         ) : (
-                          <div className=" w-20 rounded-[0.5em]  shrink-0 h-28 bg-gradient-to-b from-gray-400/30 to-gray-400/10"></div>
+                          <div className=" w-20 rounded-[0.5em]  shrink-0 h-28 bg-linear-to-b from-gray-400/30 to-gray-400/10"></div>
                         )}
                         <div className="flex flex-col gap-1">
                           <h1 className="text-white text-[15px]">

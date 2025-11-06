@@ -2,7 +2,7 @@ import ScheduleSection from "@/components/layout/ScheduleSection";
 import { useState, useEffect } from "react";
 import type { UrlProps } from "@/types/movies";
 
-const today = new Date().toISOString().split("T")[0];
+ const today = new Date().toISOString().split("T")[0];
 
 const urlObj = [
   {
@@ -34,6 +34,8 @@ const urlObj = [
 export default function SchedulePage() {
   const [filter, setFilter] = useState("today-released");
   const [url, setUrl] = useState<UrlProps>();
+
+ 
 
   useEffect(() => {
     const obj = urlObj.filter((u) => u.type === filter);

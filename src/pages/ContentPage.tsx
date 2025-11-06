@@ -14,6 +14,15 @@ import VerticalCard from "@/components/movie/VerticalCard";
 import Player from "@/components/movie/Player";
 import Banner from "@/components/movie/Banner";
 import useUser from "@/stores/userStore";
+import { toast } from "sonner";
+
+
+type AddMovieProps = {
+  id: string;
+  poster_path: string;
+  mediaType: string;
+  name: string;
+};
 
 const fetchMovieDatails = (mediaType: string, movieId: string) => {
   return axios.get(
@@ -58,11 +67,28 @@ export default function ContentPage() {
   });
 
   const [playTrailer, setPlayTrailer] = useState(false);
-  const { addMovie } = useUser((state) => state);
+  const { addMovie, userMovieList } = useUser((state) => state);
 
   const togglePlay = () => {
     setPlayTrailer((prev) => !prev);
   };
+
+
+  const handleAddMovie = (type:  "watched" | "bookmark", data:AddMovieProps ) => {
+     
+    console.log(userMovieList.bookmark.filter((obj) => obj.id === data.id))
+
+      if(type === "bookmark" && userMovieList.bookmark.filter((obj) => obj.id === data.id).length) {
+              toast.error("Alredy added to the bookmark list ")
+              return
+      }else if (type === "watched" && userMovieList.watched.filter((obj) => obj.id === data.id).length) {
+              toast.error("Already added to the watched list")
+              return 
+      }   
+    
+      addMovie(data,type)
+      toast.success(`Show Added to ${type} list`)      
+    } 
 
   return (
     <>
@@ -163,24 +189,20 @@ export default function ContentPage() {
               <div className="self-end max-lg:col-span-3 ">
                 <button
                   className={`w-full px-5 py-[10px] bg-purple-800 text-white rounded-[2em] cursor-pointer  mb-4 
-            max-sm:py-3 max-sm:text-[12px]  relative z-100 hover:scale-110 transition-tansform duration-300 
-            ease-in-out`}
+                max-sm:py-3 max-sm:text-[12px]  relative z-100 hover:scale-110 transition-tansform duration-300 
+                ease-in-out`}
+             onClick={() =>handleAddMovie("watched", {
+            id: movieId!,
+            poster_path: movieDetails?.data.poster_path,
+            mediaType: mediaType!,
+            name: movieDetails?.data.name
+                            ? movieDetails?.data.name
+                            : movieDetails?.data.title,
+            })}
                 >
                   <div
                     className="flex justify-center items-center gap-1"
-                    onClick={() =>
-                      addMovie(
-                        {
-                          id: movieId!,
-                          poster_path: movieDetails?.data.poster_path,
-                          mediaType: mediaType!,
-                          name: movieDetails?.data.name
-                            ? movieDetails?.data.name
-                            : movieDetails?.data.title,
-                        },
-                        "watched"
-                      )
-                    }
+                   
                   >
                     <IconEye className="size-5  max-sm:size-4"></IconEye>
                     <h1> Mark as Watched</h1>
@@ -188,23 +210,20 @@ export default function ContentPage() {
                 </button>
                 <button
                   className={`w-full px-5 py-[10px] bg-gray-900 text-white rounded-[2em] cursor-pointer mb-4
-            max-sm:py-3 max-sm:text-[12px] relative z-100  hover:scale-110 transition-tansform duration-300 ease-in-out `}
-                >
-                  <div
-                    className="flex justify-center items-center gap-1"
-                    onClick={() =>
-                      addMovie(
-                        {
-                          id: movieId!,
-                          poster_path: movieDetails?.data.poster_path,
-                          mediaType: mediaType!,
-                          name: movieDetails?.data.name
+                   max-sm:py-3 max-sm:text-[12px] relative z-100  hover:scale-110 transition-tansform duration-300 ease-in-out `}
+                 onClick={() =>handleAddMovie("bookmark", {
+            id: movieId!,
+            poster_path: movieDetails?.data.poster_path,
+            mediaType: mediaType!,
+            name: movieDetails?.data.name
                             ? movieDetails?.data.name
                             : movieDetails?.data.title,
-                        },
-                        "bookmark"
-                      )
-                    }
+            })}
+                >
+
+                  <div
+                    className="flex justify-center items-center gap-1"
+                   
                   >
                       <IconBookmark className={`size-5  max-sm:size-4 fill-blue-700 `}></IconBookmark>
                     <h1>BookMark</h1>

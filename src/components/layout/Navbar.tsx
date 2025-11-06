@@ -1,7 +1,10 @@
-import {Link} from "react-router-dom"
+import {Link, useLocation} from "react-router-dom"
 import { IconHome, IconCalendar, IconSearch, IconUser } from "@tabler/icons-react"
 
 export default function Navbar() {
+
+  const route  = useLocation()
+
   return (
     <nav
       className="flex fixed h-20  z-400 w-full items-center justify-center py-10 backdrop-blur bg-black/50  shadow-blue-950 shadow-xs
@@ -23,19 +26,23 @@ export default function Navbar() {
           </Link>
         </div>
 
-        <div className="flex gap-5 items-center ">
-          <Link to="/explore" className="max-sm:hidden">
-            <IconHome className="text-gray-400 size-5 hover:scale-120 transition-transform duration-300 hover:cursor-pointer  hover:text-white " />
+        <div className="flex gap-5 items-center  max-sm:hidden">
+          <Link to="/explore" >
+            <IconHome className={` size-5 hover:scale-120 transition-transform duration-300 hover:cursor-pointer  hover:text-white 
+              ${route.pathname === "/explore"? "text-blue-400":"text-gray-400"}`} />
           </Link>
-          <Link to="/schedule" className="max-sm:hidden">
-            <IconCalendar className="text-gray-400 size-5 hover:scale-120 transition-transform duration-300 hover:cursor-pointer  hover:text-white" />
+          <Link to="/schedule" >
+            <IconCalendar className={` size-5 hover:scale-120 transition-transform duration-300 hover:cursor-pointer  hover:text-white 
+              ${route.pathname === "/schedule"? "text-blue-400":"text-gray-400"}`} />
           </Link>
 
-          <Link to="/user/watched" className="max-sm:hidden">
-            <IconUser className="text-gray-400 size-5 hover:scale-120 transition-transform duration-300 hover:cursor-pointer  hover:text-white" />
+          <Link to="/user/watched" >
+            <IconUser className={` size-5 hover:scale-120 transition-transform duration-300 hover:cursor-pointer  hover:text-white 
+              ${route.pathname === "/user/watched"? "text-blue-400":"text-gray-400"}`} />
           </Link>
           <Link to="/search">
-            <IconSearch className="text-gray-400 size-5 hover:scale-120 transition-transform duration-300 hover:cursor-pointer  hover:text-white" />
+            <IconSearch className={` size-5 hover:scale-120 transition-transform duration-300 hover:cursor-pointer  hover:text-white 
+              ${route.pathname === "/search"? "text-blue-400":"text-gray-400"}`} />
           </Link>
         </div>
       </div>

@@ -13,13 +13,13 @@ export default function Banner({
 }: BannerProps) {
   return (
     <div className="pt-20 h-[950px] w-full relative aspect-[4/2] max-lg:h-[750px] max-sm:h-[450px] max-sm:pt-15 transition-all duration-500 ease-in-out  shrink-0  ">
-      <img
+    { backdrop_path ? <img
         src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
         className="w-full h-full object-cover max-sm:object-center"
         alt={"bannerImage"}
         loading="lazy"
-      ></img>
-
+      ></img>:<div className="w-full h-full object-cover max-sm:object-center bg-gray-500/25"></div>
+    }
       {isTrailerArrayEmpty && (
         <div className="absolute top-0 z-30 w-full h-[950px] flex justify-center items-center">
           <div
