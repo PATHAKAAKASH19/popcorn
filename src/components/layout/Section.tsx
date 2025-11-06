@@ -77,7 +77,7 @@ export default function Section({
 
           <div className="w-full relative group/parent">
             <div
-              className="absolute z-10 bottom-0 top-0 h-full bg-gradient-to-r from-black to-transparent cursor-pointer 
+              className="absolute z-10 bottom-0 top-0 h-full bg-linear-to-r from-black to-transparent cursor-pointer 
             opacity-0 group-hover/parent:opacity-100 transition-opacity duration-500 "
             >
               <div
@@ -106,7 +106,7 @@ export default function Section({
              }
             </div>
             <div
-              className="absolute z-10 bottom-0 top-0 h-full bg-gradient-to-r to-black from-transparent cursor-pointer right-0 
+              className="absolute z-10 bottom-0 top-0 h-full bg-linear-to-r to-black from-transparent cursor-pointer right-0 
             opacity-0 group-hover/parent:opacity-100 transition-opacity duration-500"
             >
               <div

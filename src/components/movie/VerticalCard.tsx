@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import type { MovieProps } from "@/types/movies";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 
 
@@ -23,10 +24,11 @@ export default function VerticalCard({ movie , mediaType, cn="w-55", h}: MovieCa
       {movie.poster_path ? (
         <div className={`${h}`}>
           <img
-            src={`https://image.tmdb.org/t/p/w780/${movie?.poster_path}`}
+            src={`https://image.tmdb.org/t/p/w200/${movie?.poster_path}`}
             alt="movie-poster"
             className="rounded-xl h-full w-full"
             loading="lazy"
+          
           />
         </div>
       ) : (
