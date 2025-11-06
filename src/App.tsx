@@ -14,7 +14,7 @@ function App() {
   const route = useLocation()
   
   return (
-      <div className="w-full  font-open-sans bg-black bg-no-repeat bg-cover bg-fixed bg-top relative ">
+      <div className="w-full  font-open-sans bg-black bg-no-repeat bg-cover bg-fixed bg-top relative pb-20">
         <QueryClientProvider client={queryClient}>
           <ScrollToTop/>
           <Navbar />
