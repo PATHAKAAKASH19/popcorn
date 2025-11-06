@@ -15,6 +15,7 @@ import Player from "@/components/movie/Player";
 import Banner from "@/components/movie/Banner";
 import useUser from "@/stores/userStore";
 import { toast } from "sonner";
+import Loading from "@/components/movie/Loading";
 
 
 type AddMovieProps = {
@@ -91,9 +92,7 @@ export default function ContentPage() {
   return (
     <>
       {isLoading ? (
-        <div className="flex justify-center items-center h-screen">
-          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-        </div>
+      <Loading/>
       ) : (
         <div
           className={`w-full  flex flex-col bg-black overflow-y-hidden transition-all duration-500 ease-in-out `}

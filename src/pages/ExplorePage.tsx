@@ -2,6 +2,7 @@ import Section from "@/components/layout/Section";
 import Carousel from "@/components/layout/Carousel";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import Loading from "@/components/movie/Loading";
 
 const fetchData = (endpoint: string, params?: string) => {
   return axios.get(`${import.meta.env.VITE_BASE_URL}/${endpoint}?${params}`, {
@@ -217,9 +218,7 @@ export default function ExplorePage() {
           </div>
         </>
       ) : (
-        <div className="flex justify-center items-center h-screen">
-          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-        </div>
+        <Loading/>
       )}
     </div>
   );
