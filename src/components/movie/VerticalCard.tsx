@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import type { MovieProps } from "@/types/movies";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+
 
 
 
