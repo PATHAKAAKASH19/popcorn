@@ -30,6 +30,7 @@ It lets users explore trending movies, view details, watch trailers, and bookmar
 | **React Query** | Data fetching and caching |
 | **TMDB API** | Movie & TV show data source |
 | **Zustand** | used for global state management
+  **Axios** | used for HTTP request
 
 
 
