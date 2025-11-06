@@ -76,8 +76,6 @@ export default function ContentPage() {
 
   const handleAddMovie = (type:  "watched" | "bookmark", data:AddMovieProps ) => {
      
-    console.log(userMovieList.bookmark.filter((obj) => obj.id === data.id))
-
       if(type === "bookmark" && userMovieList.bookmark.filter((obj) => obj.id === data.id).length) {
               toast.error("Alredy added to the bookmark list ")
               return
@@ -188,7 +186,7 @@ export default function ContentPage() {
 
               <div className="self-end max-lg:col-span-3 ">
                 <button
-                  className={`w-full px-5 py-[10px] bg-purple-800 text-white rounded-[2em] cursor-pointer  mb-4 
+                  className={`w-full px-5 py-2.5 bg-purple-800 text-white rounded-[2em] cursor-pointer  mb-4 
                 max-sm:py-3 max-sm:text-[12px]  relative z-100 hover:scale-110 transition-tansform duration-300 
                 ease-in-out`}
              onClick={() =>handleAddMovie("watched", {
@@ -209,7 +207,7 @@ export default function ContentPage() {
                   </div>
                 </button>
                 <button
-                  className={`w-full px-5 py-[10px] bg-gray-900 text-white rounded-[2em] cursor-pointer mb-4
+                  className={`w-full px-5 py-2.5 bg-gray-900 text-white rounded-[2em] cursor-pointer mb-4
                    max-sm:py-3 max-sm:text-[12px] relative z-100  hover:scale-110 transition-tansform duration-300 ease-in-out `}
                  onClick={() =>handleAddMovie("bookmark", {
             id: movieId!,

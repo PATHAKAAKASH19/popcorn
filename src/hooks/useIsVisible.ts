@@ -7,7 +7,7 @@ export function useIsVisible<T extends HTMLElement>() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.8 } // triggers when 20% visible
+      { threshold: 0.4 } // triggers when 40% visible
     );
 
     if (ref.current) observer.observe(ref.current);

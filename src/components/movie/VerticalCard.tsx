@@ -13,7 +13,6 @@ type MovieCardProp = {
 
 export default function VerticalCard({ movie , mediaType, cn="w-55", h}: MovieCardProp) {
   
-  console.log(movie)
   return (
     <Link
       to={`/${mediaType}/${movie.id}`}

@@ -37,8 +37,6 @@ export default function Carousel({
   };
 
 
-  console.log("movie", movieData)
-
   useEffect(() => {
     // If there is no data, exit early
     if(!autoSlide) return
@@ -109,7 +107,7 @@ export default function Carousel({
                 </div>
                 <button
                   type="button"
-                  className=" px-6 py-2 rounded-[0.5em] text-[18px] bg-gradient-to-br from-blue-800  to-black/10 hover:from-blue-500
+                  className=" px-6 py-2 rounded-[0.5em] text-[18px] bg-linear-to-br from-blue-800  to-black/10 hover:from-blue-500
                         text-white font-medium cursor-pointer  hover:scale-110 transition-transform duration-500 ease-in-out
                        max-sm:px-3 max-sm:py-2 max-sm:text-[11px] relative z-30 
                        "
@@ -128,7 +126,7 @@ export default function Carousel({
           <div className="absolute z-50 left-0  bottom-0 top-0 flex justify-center items-center pb-25  max-lg:hidden ">
             <div
               className="w-15 h-15 flex justify-center items-center text-white m-10 rounded-[50%] backdrop-blur bg-black/30
-                 hover:cursor-pointer hover:bg-gradient-to-br hover:from-blue-700 hover:to-black/20 "
+                 hover:cursor-pointer hover:bg-linear-to-br hover:from-blue-700 hover:to-black/20 "
               onClick={() => handleCrousal("left")}
             >
               <IconArrowNarrowLeft className=" " />
@@ -137,7 +135,7 @@ export default function Carousel({
           <div className="absolute z-50 right-0  bottom-0 top-0 flex justify-center items-center pb-25 max-lg:hidden ">
             <div
               className="w-15 h-15 flex justify-center items-center text-white m-10 rounded-[50%] backdrop-blur
-               bg-black/30 hover:cursor-pointer hover:bg-gradient-to-br hover:from-blue-700 hover:to-black/20  "
+               bg-black/30 hover:cursor-pointer hover:bg-linear-to-br hover:from-blue-700 hover:to-black/20  "
               onClick={() => handleCrousal("right")}
             >
               <IconArrowNarrowRight className=" " />

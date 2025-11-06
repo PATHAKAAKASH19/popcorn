@@ -4,7 +4,7 @@ import { IconHome, IconCalendar, IconSearch, IconUser } from "@tabler/icons-reac
 export default function Navbar() {
 
   const route  = useLocation()
-
+ 
   return (
     <nav
       className="flex fixed h-20  z-400 w-full items-center justify-center py-10 backdrop-blur bg-black/50  shadow-blue-950 shadow-xs
@@ -38,7 +38,7 @@ export default function Navbar() {
 
           <Link to="/user/watched" >
             <IconUser className={` size-5 hover:scale-120 transition-transform duration-300 hover:cursor-pointer  hover:text-white 
-              ${route.pathname === "/user/watched"? "text-blue-400":"text-gray-400"}`} />
+              ${`/${route.pathname.split("/")[1]}` === "/user"? "text-blue-400":"text-gray-400"}`} />
           </Link>
           <Link to="/search">
             <IconSearch className={` size-5 hover:scale-120 transition-transform duration-300 hover:cursor-pointer  hover:text-white 

@@ -1,5 +1,4 @@
 import Section from "@/components/layout/Section";
-
 import Carousel from "@/components/layout/Carousel";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -27,47 +26,7 @@ export default function ExplorePage() {
     queryFn: () => fetchData("trending/all/week", "language=en-US"),
   });
 
-  // const categories = [
-  //   {
-  //     queryKey: "trending-movies",
-  //     endpoint: "trending/movie/day",
-  //     heading: "Trending Movies",
-  //     params: "language=en-US",
-  //     mediaType: "movie",
-  //   },
-  //   {
-  //     queryKey: "trending-shows",
-  //     endpoint: "trending/tv/day",
-  //     heading: "Trending Shows",
-  //     params: "language=en-US",
-  //     mediaType: "tv",
-  //   },
 
-  //   {
-  //     queryKey: "netflix-show",
-  //     endpoint: "/discover/movie",
-  //     heading: "Popular on Netflix",
-  //     params: "with_watch_providers=8&watch_region=IN&sort_by=popularity.desc",
-  //     mediaType: "movie",
-  //   },
-
-  //   {
-  //     queryKey: "amazon-show",
-  //     endpoint: "/discover/movie",
-  //     heading: "Popular on Amazon",
-  //     params:
-  //       "with_watch_providers=119&watch_region=IN&sort_by=popularity.desc",
-  //     mediaType: "movie",
-  //   },
-
-  //   {
-  //     queryKey: "upcoming-show",
-  //     endpoint: "/movie/upcoming",
-  //     heading: "Upcoming Movie",
-  //     params: "region=IN",
-  //     mediaType: "movie",
-  //   },
-  // ];
 
   const genreSections = [
     {
@@ -232,7 +191,6 @@ export default function ExplorePage() {
     },
   ];
 
-  console.log(movies)
   return (
     <div className="flex  flex-col  items-center justify-evenly overflow-hidden ">
       {!isLoading ? (

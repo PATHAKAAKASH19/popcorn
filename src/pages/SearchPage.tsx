@@ -53,7 +53,7 @@ export default function SearchPage() {
     addHistory(movieName);
   };
 
-  console.log(data);
+ 
   return (
     <div className="w-screen h-screen bg-black p-20  flex  items-center flex-col max-sm:px-10 max-sm:py-17 ">
       <div className="w-6xl flex flex-col max-xl:w-4xl max-lg:w-2xl  max-md:w-md max-sm:w-85 h-full transition-all duration-500 ease-in-out">

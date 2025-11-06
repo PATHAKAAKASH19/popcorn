@@ -58,7 +58,6 @@ export default function ScheduleSection({ urlObj }: ScheduleSectionProps) {
         {}
       );
 
-      // Convert {date: items[]} → [{date, data: items}]
       const groupedArray = Object.entries(groupedByDate)
         .map(([date, data]) => ({
           date,
@@ -76,7 +75,6 @@ export default function ScheduleSection({ urlObj }: ScheduleSectionProps) {
     },
   });
 
-  console.log(data);
   return (
     <>
       {isLoading ? (
@@ -92,14 +90,14 @@ export default function ScheduleSection({ urlObj }: ScheduleSectionProps) {
       ) : (
         <div className="flex gap-3 flex-col items-center   transition-all duration-500 ease-in-out max-md:w-full max-md:px-2">
           {data.map((obj) => (
-            <div className="flex  gap-1 mb-8  max-sm:w-full max-sm:mb-0">
+            <div className="flex  gap-1 mb-8  max-sm:w-full max-sm:mb-0" key={obj.date}>
               <div
                 className="w-15 h-fit flex flex-col justify-center items-center py-2 px-2 rounded-xl bg-gray-500/20 
               border-gray-500/70  max-sm:w-12"
               >
                 {getDate(obj.date).map((data) => {
                   return (
-                    <h1 className="text-gray-400/90 text-[14px] max-sm:text-[12px]">{data}</h1>
+                    <h1 className="text-gray-400/90 text-[14px] max-sm:text-[12px]" key={data}>{data}</h1>
                   );
                 })}
               </div>
@@ -110,9 +108,10 @@ export default function ScheduleSection({ urlObj }: ScheduleSectionProps) {
               >
                 {obj.data.map((movie: MovieProps) => (
                   <VerticalCard
+                   
                     movie={movie}
                     mediaType={movie.media_type}
-                    key={movie.id}
+                    key={`${movie.id}`}
                     cn="w-45 "
                     h="h-65 max-sm:h-50 max-lg:h-55"
                   />

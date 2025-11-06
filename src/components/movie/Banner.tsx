@@ -12,7 +12,7 @@ export default function Banner({
   togglePlay,
 }: BannerProps) {
   return (
-    <div className="pt-20 h-[950px] w-full relative aspect-[4/2] max-lg:h-[750px] max-sm:h-[450px] max-sm:pt-15 transition-all duration-500 ease-in-out  shrink-0  ">
+    <div className="pt-20 h-[950px] w-full relative aspect-4/2 max-lg:h-[750px] max-sm:h-[450px] max-sm:pt-15 transition-all duration-500 ease-in-out  shrink-0  ">
     { backdrop_path ? <img
         src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
         className="w-full h-full object-cover max-sm:object-center"
@@ -30,7 +30,7 @@ export default function Banner({
           </div>
         </div>
       )}
-      <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black via-black/80 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-linear-to-t from-black via-black/80 to-transparent" />
     </div>
   );
 }

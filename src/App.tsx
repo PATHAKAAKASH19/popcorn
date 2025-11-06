@@ -11,11 +11,9 @@ const queryClient = new QueryClient()
 
 function App() {
  
-   const route = useLocation()
-     
- 
+  const route = useLocation()
   
-    return (
+  return (
       <div className="w-full  font-open-sans bg-black bg-no-repeat bg-cover bg-fixed bg-top relative ">
         <QueryClientProvider client={queryClient}>
           <ScrollToTop/>
