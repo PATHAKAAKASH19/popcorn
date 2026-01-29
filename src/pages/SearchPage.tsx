@@ -7,11 +7,11 @@ import { useNavigate } from "react-router-dom";
 import useHistory from "@/stores/historyStore";
 import { IconX, IconSearch } from "@tabler/icons-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { SEOHead } from "@/components/SEO";
 
 const searchAll = (query: string) => {
   return axios.get(
-    `${
-      import.meta.env.VITE_BASE_URL
+    `${import.meta.env.VITE_BASE_URL
     }/search/multi?api_key=${import.meta.env.VITE_SECRET_KEY}&query=${encodeURIComponent(
       query
     )}&language=en-US&page=1&include_adult=false`,
@@ -31,7 +31,7 @@ export default function SearchPage() {
   );
   const navigate = useNavigate();
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["content", debounceQuery],
     queryFn: () => searchAll(debounceQuery),
     enabled: !!debounceQuery,
@@ -53,14 +53,19 @@ export default function SearchPage() {
     addHistory(movieName);
   };
 
- 
+
   return (
     <div className="w-screen h-screen bg-black p-20  flex  items-center flex-col max-sm:px-10 max-sm:py-17 ">
+      <SEOHead
+        title="Search Movies & TV Shows - MovieSite"
+        description="Search for your favorite movies, TV shows, anime, cast and crew. Discover new content and add to your watchlist."
+      />
       <div className="w-6xl flex flex-col max-xl:w-4xl max-lg:w-2xl  max-md:w-md max-sm:w-85 h-full transition-all duration-500 ease-in-out">
         <div className="pointer-events-auto flex  w-full justify-center items-center  mt-8 border  border-gray-500/30 h-fit bg-[#171717]  rounded-2xl max-md:mt-2  max-sm:rounded-[0.5em]">
           <div className="w-11 h-full flex  justify-center items-center">
             <IconSearch className="text-white size-4"></IconSearch>
           </div>
+          <label htmlFor="search-box" className="sr-only">Search for movies and shows</label>
           <input
             id="search-box"
             type="text"
@@ -70,6 +75,7 @@ export default function SearchPage() {
             placeholder="Search for Movies, Shows, Anime, Cast & Crew..."
             className=" py-2 bg-[#171717] h-16 rounded-2xl placeholder:text-gray-400 w-full border-none outline-none
              text-white max-md:h-13  max-sm:h-11 max-sm:rounded-[0.5em] max-md:text-[13px]"
+            aria-label="Search for movies, shows, anime, cast and crew"
           />
         </div>
 
@@ -147,6 +153,16 @@ export default function SearchPage() {
                       </div>
                     );
                   })}
+                </div>
+              ) : error ? (
+                <div className="flex flex-col items-center justify-center py-20">
+                  <h2 className="text-white text-xl mb-2">Search Error</h2>
+                  <p className="text-gray-400 text-sm">Unable to search. Please try again.</p>
+                </div>
+              ) : data && data.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-20">
+                  <h2 className="text-white text-xl mb-2">No Results Found</h2>
+                  <p className="text-gray-400 text-sm">Try searching with different keywords</p>
                 </div>
               ) : (
                 <div className="grid grid-cols-4 gap-4 overflow-auto scrollbar-hide max-xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1">

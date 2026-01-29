@@ -11,6 +11,14 @@ export type MovieProps = {
   first_air_date: string;
 };
 
+// Simplified type for bookmarks and watched lists
+export type AddMovieProps = {
+  id: string;
+  poster_path: string;
+  mediaType: string;
+  name: string;
+};
+
 
 
 export type CastProps = {

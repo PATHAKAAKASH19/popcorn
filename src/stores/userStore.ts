@@ -1,24 +1,18 @@
 import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
-
-type MovieProps = {
-  id: string;
-  poster_path: string;
-  mediaType: string;
-  name: string;
-};
+import type { AddMovieProps } from "@/types/movies";
 
 type MovieListProps = {
-  watched: MovieProps[];
-  bookmark: MovieProps[];
+  watched: AddMovieProps[];
+  bookmark: AddMovieProps[];
 };
 
 
 type UserProps = {
-    userMovieList: MovieListProps;
-    addMovie: (movieObj: MovieProps, type: "bookmark" | "watched") => void;
-    deleteMovie: (movieId: string, type: "bookmark" | "watched") => void;
-    deleteAll: (type: "bookmark"|"watched") => void;
+  userMovieList: MovieListProps;
+  addMovie: (movieObj: AddMovieProps, type: "bookmark" | "watched") => void;
+  deleteMovie: (movieId: string, type: "bookmark" | "watched") => void;
+  deleteAll: (type: "bookmark" | "watched") => void;
 };
 
 const useUser = create<UserProps>()(
@@ -57,7 +51,7 @@ const useUser = create<UserProps>()(
                 userMovieList: {
                   ...state.userMovieList,
                   bookmark: state.userMovieList.bookmark.filter(
-                    (obj: MovieProps) => obj.id !== id
+                    (obj: AddMovieProps) => obj.id !== id
                   ),
                 },
               };
@@ -66,7 +60,7 @@ const useUser = create<UserProps>()(
                 userMovieList: {
                   ...state.userMovieList,
                   watched: state.userMovieList.watched.filter(
-                    (obj: MovieProps) => obj.id !== id
+                    (obj: AddMovieProps) => obj.id !== id
                   ),
                 },
               };
@@ -75,23 +69,23 @@ const useUser = create<UserProps>()(
         },
 
         deleteAll: (type) => {
-            set((state:UserProps) => {
-                if (type === "bookmark") {
-                    return {
-                        userMovieList: {
-                            ...state.userMovieList,
-                            bookmark: []
-                        }
-                    }
-                } else {
-                    return {
-                        userMovieList: {
-                            ...state.userMovieList,
-                            watched:[]
-                        }
-                    }
+          set((state: UserProps) => {
+            if (type === "bookmark") {
+              return {
+                userMovieList: {
+                  ...state.userMovieList,
+                  bookmark: []
                 }
-            })
+              }
+            } else {
+              return {
+                userMovieList: {
+                  ...state.userMovieList,
+                  watched: []
+                }
+              }
+            }
+          })
         },
       }),
       { name: "userDataStore" }

@@ -8,6 +8,7 @@ const fetchData = (endpoint: string, params?: string) => {
   return axios.get(`${import.meta.env.VITE_BASE_URL}/${endpoint}?${params}`, {
     headers: {
       Authorization: `Bearer ${import.meta.env.VITE_API_SECRET}`,
+   
     },
   });
 };

@@ -8,6 +8,7 @@ import type {
   GenerProps,
   CrewProps,
   CastProps,
+  AddMovieProps,
 } from "@/types/movies";
 import axios from "axios";
 import VerticalCard from "@/components/movie/VerticalCard";
@@ -16,19 +17,11 @@ import Banner from "@/components/movie/Banner";
 import useUser from "@/stores/userStore";
 import { toast } from "sonner";
 import Loading from "@/components/movie/Loading";
+import { SEOHead } from "@/components/SEO";
 
-
-type AddMovieProps = {
-  id: string;
-  poster_path: string;
-  mediaType: string;
-  name: string;
-};
-
-const fetchMovieDatails = (mediaType: string, movieId: string) => {
+const fetchMovieDetails = (mediaType: string, movieId: string) => {
   return axios.get(
-    `${
-      import.meta.env.VITE_BASE_URL
+    `${import.meta.env.VITE_BASE_URL
     }/${mediaType}/${movieId}?language=en-US&append_to_response=videos,credits,similar`,
     {
       headers: {
@@ -40,8 +33,7 @@ const fetchMovieDatails = (mediaType: string, movieId: string) => {
 
 const fetchMovieTrailer = (mediaType: string, movieId: string) => {
   return axios.get(
-    `${import.meta.env.VITE_BASE_URL}/${mediaType}/${movieId}/videos?api_key=${
-      import.meta.env.VITE_API_KEY
+    `${import.meta.env.VITE_BASE_URL}/${mediaType}/${movieId}/videos?api_key=${import.meta.env.VITE_API_KEY
     }`,
     {
       headers: {
@@ -54,9 +46,9 @@ const fetchMovieTrailer = (mediaType: string, movieId: string) => {
 export default function ContentPage() {
   const { mediaType, movieId } = useParams();
 
-  const { data: movieDetails, isLoading } = useQuery({
+  const { data: movieDetails, isLoading, error } = useQuery({
     queryKey: ["movie-details", movieId],
-    queryFn: () => fetchMovieDatails(mediaType!, movieId!),
+    queryFn: () => fetchMovieDetails(mediaType!, movieId!),
     enabled: !!movieId,
     gcTime: 60 * 60 * 1000,
   });
@@ -75,24 +67,43 @@ export default function ContentPage() {
   };
 
 
-  const handleAddMovie = (type:  "watched" | "bookmark", data:AddMovieProps ) => {
-     
-      if(type === "bookmark" && userMovieList.bookmark.filter((obj) => obj.id === data.id).length) {
-              toast.error("Alredy added to the bookmark list ")
-              return
-      }else if (type === "watched" && userMovieList.watched.filter((obj) => obj.id === data.id).length) {
-              toast.error("Already added to the watched list")
-              return 
-      }   
-    
-      addMovie(data,type)
-      toast.success(`Show Added to ${type} list`)      
-    } 
+  const handleAddMovie = (type: "watched" | "bookmark", data: AddMovieProps) => {
+
+    if (type === "bookmark" && userMovieList.bookmark.filter((obj) => obj.id === data.id).length) {
+      toast.error("Alredy added to the bookmark list ")
+      return
+    } else if (type === "watched" && userMovieList.watched.filter((obj) => obj.id === data.id).length) {
+      toast.error("Already added to the watched list")
+      return
+    }
+
+    addMovie(data, type)
+    toast.success(`Show Added to ${type} list`)
+  }
+
+  const movieTitle = movieDetails?.data.title || movieDetails?.data.name || "";
+  const movieDescription = movieDetails?.data.overview || "Discover movies and TV shows";
+  const posterImage = movieDetails?.data.poster_path
+    ? `https://image.tmdb.org/t/p/w780/${movieDetails.data.poster_path}`
+    : "";
 
   return (
     <>
+      <SEOHead
+        title={movieTitle ? `${movieTitle} - MovieSite` : "MovieSite"}
+        description={movieDescription}
+        image={posterImage}
+        type="video.movie"
+      />
       {isLoading ? (
-      <Loading/>
+        <Loading />
+      ) : error ? (
+        <div className="w-full h-screen flex items-center justify-center bg-black">
+          <div className="text-center">
+            <h1 className="text-white text-2xl mb-4">Error loading content</h1>
+            <p className="text-gray-400">Unable to load movie details. Please try again later.</p>
+          </div>
+        </div>
       ) : (
         <div
           className={`w-full  flex flex-col bg-black overflow-y-hidden transition-all duration-500 ease-in-out `}
@@ -172,34 +183,37 @@ export default function ContentPage() {
                     </h3>
                   </div>
 
-                  <div className="justify-self-start">
-                    <h3 className="text-gray-400 text-[13px] pb-1 line-clamp-1 max-sm:text-[11px] ">
-                      Age Rating
-                    </h3>
-                    <h3 className="text-white whitespace-normal line-clamp-2 font-medium max-md:text-[14px] max-sm:text-[11px]">
-                      18+
-                    </h3>
-                  </div>
+                  {movieDetails?.data.adult !== undefined && (
+                    <div className="justify-self-start">
+                      <h3 className="text-gray-400 text-[13px] pb-1 line-clamp-1 max-sm:text-[11px] ">
+                        Age Rating
+                      </h3>
+                      <h3 className="text-white whitespace-normal line-clamp-2 font-medium max-md:text-[14px] max-sm:text-[11px]">
+                        {movieDetails?.data.adult ? "18+" : "PG"}
+                      </h3>
+                    </div>
+                  )}
                 </div>
               </div>
 
               <div className="self-end max-lg:col-span-3 ">
                 <button
                   className={`w-full px-5 py-2.5 bg-purple-800 text-white rounded-[2em] cursor-pointer  mb-4 
-                max-sm:py-3 max-sm:text-[12px]  relative z-100 hover:scale-110 transition-tansform duration-300 
+                max-sm:py-3 max-sm:text-[12px]  relative z-100 hover:scale-110 transition-transform duration-300 
                 ease-in-out`}
-             onClick={() =>handleAddMovie("watched", {
-            id: movieId!,
-            poster_path: movieDetails?.data.poster_path,
-            mediaType: mediaType!,
-            name: movieDetails?.data.name
-                            ? movieDetails?.data.name
-                            : movieDetails?.data.title,
-            })}
+                  onClick={() => handleAddMovie("watched", {
+                    id: movieId!,
+                    poster_path: movieDetails?.data.poster_path,
+                    mediaType: mediaType!,
+                    name: movieDetails?.data.name
+                      ? movieDetails?.data.name
+                      : movieDetails?.data.title,
+                  })}
+                  aria-label="Mark this content as watched"
                 >
                   <div
                     className="flex justify-center items-center gap-1"
-                   
+
                   >
                     <IconEye className="size-5  max-sm:size-4"></IconEye>
                     <h1> Mark as Watched</h1>
@@ -207,22 +221,23 @@ export default function ContentPage() {
                 </button>
                 <button
                   className={`w-full px-5 py-2.5 bg-gray-900 text-white rounded-[2em] cursor-pointer mb-4
-                   max-sm:py-3 max-sm:text-[12px] relative z-100  hover:scale-110 transition-tansform duration-300 ease-in-out `}
-                 onClick={() =>handleAddMovie("bookmark", {
-            id: movieId!,
-            poster_path: movieDetails?.data.poster_path,
-            mediaType: mediaType!,
-            name: movieDetails?.data.name
-                            ? movieDetails?.data.name
-                            : movieDetails?.data.title,
-            })}
+                   max-sm:py-3 max-sm:text-[12px] relative z-100  hover:scale-110 transition-transform duration-300 ease-in-out `}
+                  onClick={() => handleAddMovie("bookmark", {
+                    id: movieId!,
+                    poster_path: movieDetails?.data.poster_path,
+                    mediaType: mediaType!,
+                    name: movieDetails?.data.name
+                      ? movieDetails?.data.name
+                      : movieDetails?.data.title,
+                  })}
+                  aria-label="Bookmark this content"
                 >
 
                   <div
                     className="flex justify-center items-center gap-1"
-                   
+
                   >
-                      <IconBookmark className={`size-5  max-sm:size-4 fill-blue-700 `}></IconBookmark>
+                    <IconBookmark className={`size-5  max-sm:size-4 fill-blue-700 `}></IconBookmark>
                     <h1>BookMark</h1>
                   </div>
                 </button>
