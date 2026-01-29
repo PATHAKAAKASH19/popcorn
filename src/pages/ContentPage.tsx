@@ -18,6 +18,7 @@ import useUser from "@/stores/userStore";
 import { toast } from "sonner";
 import Loading from "@/components/movie/Loading";
 import { SEOHead } from "@/components/SEO";
+import { extractIdFromSlug } from "@/utils/slugify";
 
 const fetchMovieDetails = (mediaType: string, movieId: string) => {
   return axios.get(
@@ -44,7 +45,10 @@ const fetchMovieTrailer = (mediaType: string, movieId: string) => {
 };
 
 export default function ContentPage() {
-  const { mediaType, movieId } = useParams();
+  const { mediaType, movieId: slugParam } = useParams();
+
+  // Extract the actual ID from the slug
+  const movieId = slugParam ? extractIdFromSlug(slugParam) : null;
 
   const { data: movieDetails, isLoading, error } = useQuery({
     queryKey: ["movie-details", movieId],

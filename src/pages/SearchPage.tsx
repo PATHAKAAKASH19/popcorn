@@ -8,6 +8,7 @@ import useHistory from "@/stores/historyStore";
 import { IconX, IconSearch } from "@tabler/icons-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SEOHead } from "@/components/SEO";
+import { createContentSlug } from "@/utils/slugify";
 
 const searchAll = (query: string) => {
   return axios.get(
@@ -48,8 +49,9 @@ export default function SearchPage() {
     [setQuery]
   );
 
-  const navigateToContent = (route: string, movieName: string) => {
-    navigate(route);
+  const navigateToContent = (mediaType: string, movieId: number, movieName: string) => {
+    const slug = createContentSlug(movieName, movieId);
+    navigate(`/${mediaType}/${slug}`);
     addHistory(movieName);
   };
 
@@ -174,7 +176,8 @@ export default function SearchPage() {
                     hover:bg-[#1F1F1F] cursor-pointer transition-colors duration-500 ease-in-out"
                         onClick={() =>
                           navigateToContent(
-                            `/${movie.media_type}/${movie.id}`,
+                            movie.media_type,
+                            movie.id,
                             `${movie.title ? movie.title : movie.name}`
                           )
                         }

@@ -1,22 +1,23 @@
 import { Link } from "react-router-dom";
 import type { MovieProps } from "@/types/movies";
-
-
+import { createContentSlug } from "@/utils/slugify";
 
 
 type MovieCardProp = {
   movie: MovieProps,
   mediaType?: string,
-  cn?: string, 
-  h?:string
+  cn?: string,
+  h?: string
 }
 
 
-export default function VerticalCard({ movie , mediaType, cn="w-55", h}: MovieCardProp) {
-  
+export default function VerticalCard({ movie, mediaType, cn = "w-55", h }: MovieCardProp) {
+  const movieTitle = movie.title || movie.name || "untitled";
+  const slug = createContentSlug(movieTitle, movie.id);
+
   return (
     <Link
-      to={`/${mediaType}/${movie.id}`}
+      to={`/${mediaType}/${slug}`}
       className={`rounded-xl  flex flex-col gap-3 pb-4 backdrop-blur hover:scale-110 transition-transform duration-300 ease-in-out 
       shrink-0 max-sm:w-33 ${cn} `}
       key={movie.title ? movie.title : movie?.name}
@@ -25,21 +26,21 @@ export default function VerticalCard({ movie , mediaType, cn="w-55", h}: MovieCa
         <div className={`${h}`}>
           <img
             src={`https://image.tmdb.org/t/p/w200/${movie?.poster_path}`}
-            alt="movie-poster"
+            alt={`${movieTitle} poster`}
             className="rounded-xl h-full w-full"
             loading="lazy"
-          
+
           />
         </div>
       ) : (
-          <div className={`w-full h-50 bg-gray-800 rounded-[1em] flex justify-center items-center  text-gray-300 ${h}`}>
-          <h1 className="p-2 text-center">{movie.title ? movie.title : movie.name}</h1>
+        <div className={`w-full h-50 bg-gray-800 rounded-[1em] flex justify-center items-center  text-gray-300 ${h}`}>
+          <h1 className="p-2 text-center">{movieTitle}</h1>
         </div>
       )}
 
       <div>
         <h1 className="line-clamp-1 pl-2  pb-1 text-gray-300 max-sm:text-[13px]">
-          {movie.title ? movie.title : movie.name}
+          {movieTitle}
         </h1>
         <h1 className="pl-2 text-[12px] tracking-wider text-gray-300 max-sm:text-[11px]">
           {mediaType}
