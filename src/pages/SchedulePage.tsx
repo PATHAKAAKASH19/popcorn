@@ -49,7 +49,7 @@ export default function SchedulePage() {
   };
 
   return (
-    <div className="pt-30 flex justify-center max-md:pt-15 w-screen h-screen ">
+    <div className="pt-30 flex justify-center max-md:pt-15 w-full h-screen ">
       <div className="flex justify-center w-full  gap-4  max-md:flex-col max-md:items-center px-2 max-sm:gap-0  relative ">
         <div
           className="w-70 flex flex-col justify-evenly items-center bg-gray-500/20  

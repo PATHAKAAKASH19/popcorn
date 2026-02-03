@@ -3,8 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import VerticalCard from "../movie/VerticalCard";
 import type { MovieProps } from "@/types/movies";
 import { useIsVisible } from "../../hooks/useIsVisible";
-
-
 import {
   IconChevronRight,
   IconChevronLeft,

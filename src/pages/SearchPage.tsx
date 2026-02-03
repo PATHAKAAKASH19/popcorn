@@ -57,7 +57,7 @@ export default function SearchPage() {
 
 
   return (
-    <div className="w-screen h-screen bg-black p-20  flex  items-center flex-col max-sm:px-10 max-sm:py-17 ">
+    <div className="w-full h-screen bg-black p-20  flex  items-center flex-col max-sm:px-10 max-sm:py-17 ">
       <SEOHead
         title="Search Movies & TV Shows - MovieSite"
         description="Search for your favorite movies, TV shows, anime, cast and crew. Discover new content and add to your watchlist."
